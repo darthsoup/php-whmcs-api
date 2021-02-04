@@ -9,6 +9,11 @@ use RuntimeException;
 
 final class ResponseFormatter
 {
+    /**
+     * @param ResponseInterface $response
+     * @return mixed|string
+     * @throws \JsonException
+     */
     public static function format(ResponseInterface $response)
     {
         $body = (string) $response->getBody();
@@ -20,6 +25,11 @@ final class ResponseFormatter
         return $body;
     }
 
+    /**
+     * @param ResponseInterface $response
+     * @return string|null
+     * @throws \JsonException
+     */
     public static function errorMessage(ResponseInterface $response): ?string
     {
         try {

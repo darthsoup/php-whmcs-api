@@ -11,12 +11,24 @@ Install the package through [Composer](http://getcomposer.org/).
 Run the Composer require command from the Terminal:
 
 ```bash
-composer require darthsoup/php-whmcs-api
+composer require "darthsoup/php-whmcs-api"
 ```
 
 ## Usage
 
-todo
+Example Call
+
+```php
+$identifer = "identifer_string";
+$secret = "secret_string";
+
+$client = new \DarthSoup\WhmcsApi\Client();
+$client->authenticate($identifer, $secret, \DarthSoup\WhmcsApi\Client::AUTH_API_CREDENTIALS);
+$client->url('http://<your_whmcs_instance_url>/includes/api.php');
+
+# get me all of my clients
+var_dump($client->client()->getClients());
+```
 
 ## Support
 
