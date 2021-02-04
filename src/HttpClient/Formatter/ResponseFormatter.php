@@ -38,10 +38,6 @@ final class ResponseFormatter
             return null;
         }
 
-        if (!\is_array($content)) {
-            return null;
-        }
-
         return $content['message'] ?? null;
     }
 }
