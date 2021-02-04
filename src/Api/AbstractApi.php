@@ -11,13 +11,21 @@ use function GuzzleHttp\Psr7\stream_for;
 
 abstract class AbstractApi
 {
-    private Client $client;
+    /**
+     * @var Client
+     */
+    private $client;
 
     public function __construct(Client $client)
     {
         $this->client = $client;
     }
 
+    /**
+     * @param string $action
+     * @param array $params
+     * @return mixed|string
+     */
     protected function send(string $action, array $params = [])
     {
         $uri = '';
@@ -33,6 +41,9 @@ abstract class AbstractApi
         return ResponseFormatter::format($response);
     }
 
+    /**
+     * @return Client
+     */
     protected function getClient(): Client
     {
         return $this->client;
