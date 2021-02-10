@@ -16,9 +16,12 @@ composer require "darthsoup/php-whmcs-api"
 
 ## Usage
 
-Example Call
+### Initialize Client 
 
 ```php
+<?php
+require_once __DIR__ . '/vendor/autoload.php';
+
 $identifer = "identifer_string";
 $secret = "secret_string";
 
@@ -27,7 +30,13 @@ $client->authenticate($identifer, $secret, \DarthSoup\WhmcsApi\Client::AUTH_API_
 $client->url('http://<your_whmcs_instance_url>/includes/api.php');
 
 # get me all of my clients
-var_dump($client->client()->getClients());
+$client->client()->getClients();
+```
+
+### Call custom API Route
+```php
+$parameters = ['foo' => 'bar'];
+$client->custom()->yourCustomApi($parameters);
 ```
 
 ## Support
