@@ -7,15 +7,18 @@ namespace DarthSoup\WhmcsApi\Api;
 use DarthSoup\WhmcsApi\Client;
 use DarthSoup\WhmcsApi\HttpClient\Formatter\ResponseFormatter;
 use GuzzleHttp\Psr7\AppendStream;
-use function GuzzleHttp\Psr7\stream_for;
+use GuzzleHttp\Psr7\Utils;
 
 abstract class AbstractApi
 {
     /**
      * @var Client
      */
-    private $client;
+    protected $client;
 
+    /**
+     * @param Client $client
+     */
     public function __construct(Client $client)
     {
         $this->client = $client;
@@ -23,19 +26,20 @@ abstract class AbstractApi
 
     /**
      * @param string $action
-     * @param array $params
+     * @param array $parameter
      * @return mixed|string
      */
-    protected function send(string $action, array $params = [])
+    protected function send(string $action, array $parameter = [])
     {
-        $uri = '';
         $header = [];
-        $body = array_merge(['action' => $action], $params);
+        $body = array_merge(['action' => $action], $parameter);
 
-        $stream = new AppendStream([stream_for(http_build_query($body))]);
+        $stream = new AppendStream([Utils::streamFor(http_build_query($body))]);
 
         $response = $this->client->getHttpClient()->post(
-            $uri, $header, $stream
+            '', // WHMCS doesnt use a specific url
+            $header,
+            $stream
         );
 
         return ResponseFormatter::format($response);
