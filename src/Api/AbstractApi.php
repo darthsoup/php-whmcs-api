@@ -21,12 +21,12 @@ abstract class AbstractApi
     ];
 
     /**
-     * @var Client
+     * @var Authentication
      */
     protected $client;
 
     /**
-     * @param Client $client
+     * @param Authentication $client
      */
     public function __construct(Client $client)
     {
@@ -72,6 +72,8 @@ abstract class AbstractApi
             });
         $resolver->setDefined('sorting')
             ->setAllowedValues('sorting', self::SORTING);
+        $resolver->setDefined('sortOrder')
+            ->setAllowedValues('sortOrder', self::SORTING);
         $resolver->setDefined('orderby')
             ->setAllowedValues('orderby', ['id', 'invoicenumber', 'date', 'duedate', 'total', 'status']);
         $resolver->setDefined('status')
@@ -89,11 +91,12 @@ abstract class AbstractApi
                 'Redemption', 'Expired', 'Cancelled', 'Fraud', 'Transferred Away'
             ]);
 
+
         return $resolver;
     }
 
     /**
-     * @return Client
+     * @return Authentication
      */
     protected function getClient(): Client
     {
