@@ -22,6 +22,19 @@ class ResponseFormatterTest extends TestCase
         $this->assertSame(['result' => 'success'], ResponseFormatter::format($response));
     }
 
+    public function testFormatString()
+    {
+        $expected = '{"result": "success"}';
+
+        $response = new Response(
+            200,
+            [],
+            stream_for($expected)
+        );
+
+        $this->assertEquals($expected, ResponseFormatter::format($response));
+    }
+
     public function testFormatWithInvalidResponseData()
     {
         $this->expectException(\JsonException::class);
