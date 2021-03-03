@@ -8,9 +8,18 @@ use DarthSoup\WhmcsApi\Client;
 use DarthSoup\WhmcsApi\HttpClient\Formatter\ResponseFormatter;
 use GuzzleHttp\Psr7\AppendStream;
 use GuzzleHttp\Psr7\Utils;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 abstract class AbstractApi
 {
+    public const SORT_ASC = 'ASC';
+    public const SORT_DESC = 'DESC';
+
+    public const SORTING = [
+        self::SORT_ASC,
+        self::SORT_DESC
+    ];
+
     /**
      * @var Client
      */
@@ -43,6 +52,44 @@ abstract class AbstractApi
         );
 
         return ResponseFormatter::format($response);
+    }
+
+    /**
+     * @return OptionsResolver
+     */
+    protected function createOptionsResolver(): OptionsResolver
+    {
+        $resolver = new OptionsResolver();
+        $resolver->setDefined('limitstart')
+            ->setAllowedTypes('limitstart', 'int')
+            ->setAllowedValues('limitstart', function ($value): bool {
+                return $value > 0;
+            });
+        $resolver->setDefined('limitnum')
+            ->setAllowedTypes('limitnum', 'int')
+            ->setAllowedValues('limitnum', function ($value): bool {
+                return $value > 0 && $value <= 250;
+            });
+        $resolver->setDefined('sorting')
+            ->setAllowedValues('sorting', self::SORTING);
+        $resolver->setDefined('orderby')
+            ->setAllowedValues('orderby', ['id', 'invoicenumber', 'date', 'duedate', 'total', 'status']);
+        $resolver->setDefined('status')
+            ->setAllowedValues('status', [
+                // Client
+                'Active', 'Inactive', 'Closed',
+
+                // Invoice
+                'Draft', 'Unpaid', 'Paid', 'Cancelled',
+                'Refunded', 'Collections', 'Payment Pending',
+
+                // Product - DomainStatus
+                'Suspended', 'Terminated', 'Completed', 'Pending',
+                'Pending Registration', 'Pending Transfer', 'Grace',
+                'Redemption', 'Expired', 'Cancelled', 'Fraud', 'Transferred Away'
+            ]);
+
+        return $resolver;
     }
 
     /**
