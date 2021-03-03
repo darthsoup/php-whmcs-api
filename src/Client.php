@@ -20,7 +20,7 @@ class Client
     public const AUTH_API_CREDENTIALS = 'API_TOKEN';
     public const AUTH_LOGIN_CREDENTIALS = 'USERNAME_TOKEN';
 
-    public const ENDPOINT = 'http://localhost:8081';
+    public const API_PATH = '/includes/api.php';
     public const USER_AGENT = 'php-whmcs-api';
 
     private $httpClientBuilder;
@@ -32,7 +32,6 @@ class Client
         $builder->addPlugin(new HeaderDefaultsPlugin([
             'User-Agent' => self::USER_AGENT,
         ]));
-
         $builder->addPlugin(new ExceptionHandler());
         $builder->addPlugin(new ContentType());
         $builder->addPlugin(new WhmcsContentType());
@@ -49,6 +48,7 @@ class Client
     public function url(string $url): void
     {
         $uri = $this->getHttpClientBuilder()->getUriFactory()->createUri($url);
+        $uri = $uri->withPath(self::API_PATH);
 
         $this->getHttpClientBuilder()->removePlugin(BaseUriPlugin::class);
         $this->getHttpClientBuilder()->addPlugin(
