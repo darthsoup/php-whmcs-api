@@ -66,7 +66,7 @@ class Authentication implements Plugin
                 break;
             case Client::AUTH_LOGIN_CREDENTIALS:
                 $authBag['username'] = $this->identifier;
-                $authBag['password'] = $this->secret;
+                $authBag['password'] = md5($this->secret);
                 break;
             default:
                 throw new RuntimeException(\sprintf('Authentication method "%s" not implemented.', $this->method));
