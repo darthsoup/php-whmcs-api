@@ -1,43 +1,67 @@
-# php-whmcs-api
+# PHP WHMCS API Client
 
-[![Latest Stable Version](https://poser.pugx.org/darthsoup/php-whmcs-api/v)](//packagist.org/packages/darthsoup/php-whmcs-api)
-![phpunit](https://github.com/darthsoup/php-whmcs-api/workflows/phpunit/badge.svg)
-[![License](https://poser.pugx.org/darthsoup/php-whmcs-api/license)](//packagist.org/packages/darthsoup/php-whmcs-api)
+Simple and PSR7 compatible WHMCS API Client which is inspired by [m4tthumphrey/php-gitlab-api](https://packagist.org/packages/m4tthumphrey/php-gitlab-api).
+
+[![Build Status][ico-github-actions-build]][link-github-actions-build]
+[![Software License][ico-license]][link-license]
 
 ## Installation
 
-Install the package through [Composer](http://getcomposer.org/).
-
-Run the Composer require command from the Terminal:
+### Composer
 
 ```bash
-composer require "darthsoup/php-whmcs-api"
+$ composer require "darthsoup/php-whmcs-api" "guzzlehttp/guzzle:^7.2" "http-interop/http-factory-guzzle:^1.0"
 ```
+
+### System Requirements
+
+This package requires:
+- **PHP >= 7.4**
+- `curl` and `json` php extensions
 
 ## Usage
 
 ### Initialize Client 
 
+Basic initialisation of the Client.
+
 ```php
 <?php
 require_once __DIR__ . '/vendor/autoload.php';
 
-$identifer = "identifer_string";
-$secret = "secret_string";
-
 $client = new \DarthSoup\WhmcsApi\Client();
-$client->authenticate($identifer, $secret, \DarthSoup\WhmcsApi\Client::AUTH_API_CREDENTIALS);
-$client->url('http://<your_whmcs_instance_url>/includes/api.php');
+// Auth Credentials with identifier and secret
+$client->authenticate('your_identifier', 'your_secret', \DarthSoup\WhmcsApi\Client::AUTH_API_CREDENTIALS);
+// Login Credentials with Username and Password (without md5)
+$client->authenticate('your_username', 'your_password', \DarthSoup\WhmcsApi\Client::AUTH_LOGIN_CREDENTIALS);
+$client->url('http://<your_whmcs_instance_url>');
+```
 
-# get me all of my clients
-$client->client()->getClients();
+### Get clients
+
+```php
+$client->client()->getClients(['search' => 'firstname']);
+```
+
+### Get all orders
+
+```php
+$client->orders()->getOrders();
 ```
 
 ### Call custom API Route
+
+If your WHMCS instance contains Custom API routes, you can also call them without editing the code.
+
 ```php
 $parameters = ['foo' => 'bar'];
-$client->custom()->yourCustomApi($parameters);
+$client->custom()->yourCustomApiName($parameters);
 ```
+
+## Disclaimer
+
+If you use this client, please continue to check the documentation of the [WHMCS Developer](https://developers.whmcs.com/api/api-index/) Page. 
+The documentation is very incomplete in some places functions are relatively error-prone.
 
 ## Support
 
