@@ -1,26 +1,17 @@
-name: phpunit
+name: Unittests
 
-on: [push, pull_request]
+on:
+    push:
+    pull_request:
 
 jobs:
     test:
-        runs-on: ubuntu-latest
-        strategy:
-            fail-fast: false
-            matrix:
-                php: [7.3, 7.4, 8.0]
-                laravel: [8.*, 7.*]
-                dependency-version: [prefer-lowest, prefer-stable]
-                include:
-                    -   laravel: 8.*
-                        testbench: 6.*
-                    -   laravel: 7.*
-                        testbench: 5.*
-                exclude:
-                    -   laravel: 8.*
-                        php: 7.2
+        name: PHP ${{ matrix.php }}
+        runs-on: ubuntu-20.04
 
-        name: PHP ${{ matrix.php }} - Laravel ${{ matrix.laravel }} - ${{ matrix.dependency-version }}
+        strategy:
+            matrix:
+                php: [ '7.4', '8.0', '8.1' ]
 
         steps:
             -   name: Checkout code
@@ -30,20 +21,19 @@ jobs:
                 uses: actions/cache@v2
                 with:
                     path: ~/.composer/cache/files
-                    key: dependencies-${{ matrix.laravel }}-php-${{ matrix.php }}-composer-${{ hashFiles('composer.json') }}
+                    key: dependencies-php-${{ matrix.php }}-composer-${{ hashFiles('composer.json') }}
 
             -   name: Setup PHP
                 uses: shivammathur/setup-php@v2
                 with:
                     php-version: ${{ matrix.php }}
                     extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, sqlite, pdo_sqlite, gd
-                    tools: composer:v2
+                    tools: composer:2.1
                     coverage: none
 
             -   name: Install dependencies
                 run: |
-                    composer require "laravel/framework:${{ matrix.laravel }}" "orchestra/testbench:${{ matrix.testbench }}" --no-interaction --no-update
-                    composer update --${{ matrix.dependency-version }} --prefer-dist --no-interaction --no-suggest
+                    composer update --prefer-dist --no-interaction --no-suggest
 
             -   name: Execute tests
                 run: vendor/bin/phpunit
