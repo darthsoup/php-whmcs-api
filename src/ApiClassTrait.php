@@ -6,6 +6,7 @@ namespace DarthSoup\WhmcsApi;
 
 use DarthSoup\WhmcsApi\Api\Authentication;
 use DarthSoup\WhmcsApi\Api\Billing;
+use DarthSoup\WhmcsApi\Api\Client;
 use DarthSoup\WhmcsApi\Api\Custom;
 use DarthSoup\WhmcsApi\Api\Domains;
 use DarthSoup\WhmcsApi\Api\Orders;
