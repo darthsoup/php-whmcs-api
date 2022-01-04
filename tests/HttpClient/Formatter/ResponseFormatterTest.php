@@ -6,6 +6,7 @@ namespace DarthSoup\Tests\WhmcsApi\HttpClient\Formatter\ResponseFormatter;
 
 use DarthSoup\WhmcsApi\HttpClient\Formatter\ResponseFormatter;
 use GuzzleHttp\Psr7\Response;
+use GuzzleHttp\Psr7\Utils;
 use PHPUnit\Framework\TestCase;
 use function GuzzleHttp\Psr7\stream_for;
 
@@ -16,7 +17,7 @@ class ResponseFormatterTest extends TestCase
         $response = new Response(
             200,
             ['Content-Type' => 'application/json'],
-            stream_for('{"result": "success"}')
+            Utils::streamFor('{"result": "success"}')
         );
 
         $this->assertSame(['result' => 'success'], ResponseFormatter::format($response));
@@ -29,7 +30,7 @@ class ResponseFormatterTest extends TestCase
         $response = new Response(
             200,
             [],
-            stream_for($expected)
+            Utils::streamFor($expected)
         );
 
         $this->assertEquals($expected, ResponseFormatter::format($response));
@@ -42,7 +43,7 @@ class ResponseFormatterTest extends TestCase
         $response = new Response(
             200,
             ['Content-Type' => 'application/json'],
-            stream_for('{"result": }')
+            Utils::streamFor('{"result": }')
         );
 
         ResponseFormatter::format($response);
@@ -53,7 +54,7 @@ class ResponseFormatterTest extends TestCase
         $response = new Response(
             200,
             ['Content-Type' => 'application/json'],
-            stream_for('{"result": "error", "message": "GotMessage"}')
+            Utils::streamFor('{"result": "error", "message": "GotMessage"}')
         );
 
         $message = ResponseFormatter::errorMessage($response);
