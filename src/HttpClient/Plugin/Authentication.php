@@ -71,7 +71,7 @@ class Authentication implements Plugin
                 $authBag['password'] = md5($this->secret);
                 break;
             default:
-                throw new RuntimeException(\sprintf('Authentication method "%s" not implemented.', $this->method));
+                throw new RuntimeException(\sprintf('Authentication method "%s" does not exist.', $this->method));
         }
 
         return http_build_query($authBag);

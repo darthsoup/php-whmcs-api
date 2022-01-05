@@ -20,11 +20,8 @@ abstract class AbstractApi
         self::SORT_DESC
     ];
 
-    protected $client;
+    protected Client $client;
 
-    /**
-     * @param Client $client
-     */
     public function __construct(Client $client)
     {
         $this->client = $client;
@@ -32,7 +29,7 @@ abstract class AbstractApi
 
     /**
      * @param string $action
-     * @param array $parameter
+     * @param array<string, mixed> $parameter
      * @return mixed|string
      */
     protected function send(string $action, array $parameter = [])

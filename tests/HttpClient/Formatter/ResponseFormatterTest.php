@@ -2,13 +2,12 @@
 
 declare(strict_types=1);
 
-namespace DarthSoup\Tests\WhmcsApi\HttpClient\Formatter\ResponseFormatter;
+namespace DarthSoup\Tests\WhmcsApi\HttpClient\Formatter;
 
 use DarthSoup\WhmcsApi\HttpClient\Formatter\ResponseFormatter;
 use GuzzleHttp\Psr7\Response;
 use GuzzleHttp\Psr7\Utils;
 use PHPUnit\Framework\TestCase;
-use function GuzzleHttp\Psr7\stream_for;
 
 class ResponseFormatterTest extends TestCase
 {
