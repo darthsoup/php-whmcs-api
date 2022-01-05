@@ -17,17 +17,20 @@ use Psr\Http\Message\UriFactoryInterface;
 
 class Builder
 {
-    private $httpClient;
+    private ClientInterface $httpClient;
 
-    private $pluginClient;
+    private RequestFactoryInterface $requestFactory;
 
-    private $requestFactory;
+    private StreamFactoryInterface $streamFactory;
 
-    private $streamFactory;
+    private UriFactoryInterface $uriFactory;
 
-    private $uriFactory;
+    private ?HttpMethodsClientInterface $pluginClient;
 
-    private $plugins = [];
+    /**
+     * @var array<Plugin>
+     */
+    private array $plugins = [];
 
     public function __construct(
         ClientInterface $httpClient = null,

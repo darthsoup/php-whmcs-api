@@ -23,7 +23,7 @@ class Client
     public const API_PATH = '/includes/api.php';
     public const USER_AGENT = 'php-whmcs-api';
 
-    private $httpClientBuilder;
+    private Builder $httpClientBuilder;
 
     public function __construct()
     {

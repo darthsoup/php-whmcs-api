@@ -2,8 +2,8 @@
 
 Simple and PSR7 compatible WHMCS API Client which is inspired by [m4tthumphrey/php-gitlab-api](https://packagist.org/packages/m4tthumphrey/php-gitlab-api).
 
-[![Build Status][ico-github-actions-build]][link-github-actions-build]
-[![Software License][ico-license]][link-license]
+[![Unittests](https://github.com/darthsoup/php-whmcs-api/actions/workflows/phpunit.yml/badge.svg)](https://github.com/darthsoup/php-whmcs-api/actions/workflows/phpunit.yml)
+[![GitHub license](https://img.shields.io/github/license/darthsoup/php-whmcs-api)](https://github.com/darthsoup/php-whmcs-api/blob/master/LICENSE.md)
 
 ## Installation
 
@@ -16,8 +16,8 @@ $ composer require "darthsoup/php-whmcs-api" "guzzlehttp/guzzle:^7.2" "http-inte
 ### System Requirements
 
 This package requires:
-- **PHP >= 7.4**
-- `curl` and `json` php extensions
+- **PHP ^7.4 | ^8.0**
+- PHP extensions `curl`, `json` and `mbstring` 
 
 ## Usage
 
@@ -37,6 +37,8 @@ $client->authenticate('your_username', 'your_password', \DarthSoup\WhmcsApi\Clie
 $client->url('http://<your_whmcs_instance_url>');
 ```
 
+## Examples
+
 ### Get clients
 
 ```php
@@ -51,7 +53,7 @@ $client->orders()->getOrders();
 
 ### Call custom API Route
 
-If your WHMCS instance contains Custom API routes, you can also call them without editing the code.
+If your WHMCS instance contains custom API routes, you can also call them without extending the code.
 
 ```php
 $parameters = ['foo' => 'bar'];
@@ -60,8 +62,8 @@ $client->custom()->yourCustomApiName($parameters);
 
 ## Disclaimer
 
-If you use this client, please continue to check the documentation of the [WHMCS Developer](https://developers.whmcs.com/api/api-index/) Page. 
-The documentation is very incomplete in some places functions are relatively error-prone.
+If you are using this client, please refer to the documentation on the [WHMCS Developer](https://developers.whmcs.com/api/api-index/) page.
+The documentation of the API is very incomplete in some places and in some cases questionably documented.
 
 ## Support
 
