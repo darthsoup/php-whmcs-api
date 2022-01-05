@@ -9,17 +9,15 @@ class Custom extends AbstractApi
     /**
      * Emulates a custom api route with magic __call
      *
-     * @param $name
-     * @param $arguments
      * @return mixed|string
      */
-    public function __call($name, $arguments)
+    public function __call(string $name, $arguments)
     {
         $name = ucfirst($name);
         $parameters = $arguments[0] ?? [];
 
         if (!is_array($parameters)) {
-            throw new \InvalidArgumentException('The parameters has to be an array');
+            throw new \InvalidArgumentException('The parameters must be an array.');
         }
 
         return $this->send($name, $parameters);

@@ -20,13 +20,10 @@ abstract class AbstractApi
         self::SORT_DESC
     ];
 
-    /**
-     * @var Authentication
-     */
     protected $client;
 
     /**
-     * @param Authentication $client
+     * @param Client $client
      */
     public function __construct(Client $client)
     {
@@ -96,7 +93,7 @@ abstract class AbstractApi
     }
 
     /**
-     * @return Authentication
+     * @return Client
      */
     protected function getClient(): Client
     {
