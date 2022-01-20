@@ -25,9 +25,9 @@ class Client
 
     private Builder $httpClientBuilder;
 
-    public function __construct()
+    public function __construct(Builder $httpClientBuilder = null)
     {
-        $this->httpClientBuilder = $builder = new Builder();
+        $this->httpClientBuilder = $builder = $httpClientBuilder ?? new Builder();
 
         $builder->addPlugin(new HeaderDefaultsPlugin([
             'User-Agent' => self::USER_AGENT,
