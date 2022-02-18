@@ -30,7 +30,7 @@ class Orders extends AbstractApi
         );
     }
 
-    public function deleteOrder(int $orderId, array $parameters = [])
+    public function deleteOrder(int $orderId)
     {
         return $this->send('DeleteOrder', ['orderid' => $orderId]);
     }
@@ -53,13 +53,30 @@ class Orders extends AbstractApi
         return $this->send('GetOrderStatuses');
     }
 
+    public function getProducts(array $parameters = [])
+    {
+        return $this->send(
+            'GetProducts',
+            $this->createOptionsResolver()->resolve($parameters)
+        );
+    }
+
     public function getPromotions(string $code)
     {
         return $this->send('getPromotions', ['code' => $code]);
+    }
+
+    public function orderFraudCheck(int $orderId, array $parameters = [])
+    {
+        return $this->send(
+            'OrderFraudCheck',
+            array_merge(['orderid' => $orderId], $this->createOptionsResolver()->resolve($parameters))
+        );
     }
 
     public function pendingOrder(int $orderId)
     {
         return $this->send('PendingOrder', ['orderid' => $orderId]);
     }
+
 }
