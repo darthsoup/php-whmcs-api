@@ -1,6 +1,6 @@
 # PHP WHMCS API Client
 
-Simple and PSR7 compatible WHMCS API Client which is inspired by [m4tthumphrey/php-gitlab-api](https://packagist.org/packages/m4tthumphrey/php-gitlab-api).
+Simple and PSR7 compatible WHMCS API Client which is inspired by [GitLabPHP/Client](https://github.com/GitLabPHP/Client).
 
 [![Unittests](https://github.com/darthsoup/php-whmcs-api/actions/workflows/phpunit.yml/badge.svg)](https://github.com/darthsoup/php-whmcs-api/actions/workflows/phpunit.yml)
 [![GitHub license](https://img.shields.io/github/license/darthsoup/php-whmcs-api)](https://github.com/darthsoup/php-whmcs-api/blob/master/LICENSE.md)
