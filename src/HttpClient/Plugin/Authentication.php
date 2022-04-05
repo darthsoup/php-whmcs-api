@@ -29,11 +29,17 @@ class Authentication implements Plugin
      */
     private $secret;
 
-    public function __construct(string $method, string $identifier, string $secret)
+    /**
+     * @var $accessKey
+     */
+    private $accessKey;
+
+    public function __construct(string $method, string $identifier, string $secret, string $accessKey)
     {
         $this->method = $method;
         $this->identifier = $identifier;
         $this->secret = $secret;
+        $this->accessKey = $accessKey;
     }
 
     /**
@@ -72,6 +78,10 @@ class Authentication implements Plugin
                 break;
             default:
                 throw new RuntimeException(\sprintf('Authentication method "%s" does not exist.', $this->method));
+        }
+
+        if (!empty($this->accessKey)) {
+            $authBag['accesskey'] = $this->accessKey;
         }
 
         return http_build_query($authBag);

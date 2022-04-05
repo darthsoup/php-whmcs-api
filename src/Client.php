@@ -37,11 +37,11 @@ class Client
         $builder->addPlugin(new WhmcsContentType());
     }
 
-    public function authenticate(string $identifier, string $secret, string $authMethod = self::AUTH_API_CREDENTIALS): void
+    public function authenticate(string $identifier, string $secret, string $accessKey = null, string $authMethod = self::AUTH_API_CREDENTIALS): void
     {
         $this->getHttpClientBuilder()->removePlugin(Authentication::class);
         $this->getHttpClientBuilder()->addPlugin(
-            new Authentication($authMethod, $identifier, $secret)
+            new Authentication($authMethod, $identifier, $secret, $accessKey)
         );
     }
 
