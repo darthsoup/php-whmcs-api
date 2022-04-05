@@ -54,6 +54,8 @@ abstract class AbstractApi
     protected function createOptionsResolver(): OptionsResolver
     {
         $resolver = new OptionsResolver();
+        $resolver->setDefined('search')
+            ->setAllowedTypes('search', 'string');
         $resolver->setDefined('limitstart')
             ->setAllowedTypes('limitstart', 'int')
             ->setAllowedValues('limitstart', function ($value): bool {
