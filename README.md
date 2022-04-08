@@ -10,7 +10,7 @@ Simple and PSR7 compatible WHMCS API Client which is inspired by [GitLabPHP/Clie
 ### Composer
 
 ```bash
-$ composer require "darthsoup/php-whmcs-api" "guzzlehttp/guzzle:^7.2" "http-interop/http-factory-guzzle:^1.0"
+$ composer require "darthsoup/php-whmcs-api" "guzzlehttp/guzzle:^7.4" "http-interop/http-factory-guzzle:^1.2"
 ```
 
 ### System Requirements
@@ -30,11 +30,24 @@ Basic initialisation of the Client.
 require_once __DIR__ . '/vendor/autoload.php';
 
 $client = new \DarthSoup\WhmcsApi\Client();
+
 // Auth Credentials with identifier and secret
 $client->authenticate('your_identifier', 'your_secret', \DarthSoup\WhmcsApi\Client::AUTH_API_CREDENTIALS);
+
 // Login Credentials with Username and Password (without md5)
 $client->authenticate('your_username', 'your_password', \DarthSoup\WhmcsApi\Client::AUTH_LOGIN_CREDENTIALS);
+
+// Set the URL to your whmcs instance
 $client->url('http://<your_whmcs_instance_url>');
+```
+
+### API access key
+
+In case your instance has an additional `$api_access_key` configured in your whmcs `configuration.php`,
+you can also add it by using `accessKey` in the init process.
+
+```php
+$client->accessKey('my_access_key');
 ```
 
 ## Examples
