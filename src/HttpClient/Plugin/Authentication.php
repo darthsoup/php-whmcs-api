@@ -11,6 +11,7 @@ use Http\Client\Common\Plugin;
 use Http\Promise\Promise;
 use Psr\Http\Message\RequestInterface;
 use RuntimeException;
+use function sprintf;
 
 class Authentication implements Plugin
 {
@@ -29,17 +30,11 @@ class Authentication implements Plugin
      */
     private $secret;
 
-    /**
-     * @var $accessKey
-     */
-    private $accessKey;
-
-    public function __construct(string $method, string $identifier, string $secret, string $accessKey)
+    public function __construct(string $method, string $identifier, string $secret)
     {
         $this->method = $method;
         $this->identifier = $identifier;
         $this->secret = $secret;
-        $this->accessKey = $accessKey;
     }
 
     /**
@@ -77,11 +72,7 @@ class Authentication implements Plugin
                 $authBag['password'] = md5($this->secret);
                 break;
             default:
-                throw new RuntimeException(\sprintf('Authentication method "%s" does not exist.', $this->method));
-        }
-
-        if (!empty($this->accessKey)) {
-            $authBag['accesskey'] = $this->accessKey;
+                throw new RuntimeException(sprintf('Authentication method "%s" does not exist.', $this->method));
         }
 
         return http_build_query($authBag);
