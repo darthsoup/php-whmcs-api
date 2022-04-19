@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace DarthSoup\WhmcsApi;
 
+use DarthSoup\WhmcsApi\Api\Addons;
+use DarthSoup\WhmcsApi\Api\Affiliates;
 use DarthSoup\WhmcsApi\Api\Authentication;
 use DarthSoup\WhmcsApi\Api\Billing;
 use DarthSoup\WhmcsApi\Api\Client;
@@ -11,11 +13,22 @@ use DarthSoup\WhmcsApi\Api\Custom;
 use DarthSoup\WhmcsApi\Api\Domains;
 use DarthSoup\WhmcsApi\Api\Orders;
 use DarthSoup\WhmcsApi\Api\Servers;
+use DarthSoup\WhmcsApi\Api\Service;
 use DarthSoup\WhmcsApi\Api\System;
 use DarthSoup\WhmcsApi\Api\Users;
 
 trait ApiClassTrait
 {
+    public function addons(): Addons
+    {
+        return new Addons($this);
+    }
+
+    public function affiliates(): Affiliates
+    {
+        return new Affiliates($this);
+    }
+
     public function authentication(): Authentication
     {
         return new Authentication($this);
@@ -44,6 +57,11 @@ trait ApiClassTrait
     public function servers(): Servers
     {
         return new Servers($this);
+    }
+
+    public function service(): Service
+    {
+        return new Service($this);
     }
 
     public function system(): System
