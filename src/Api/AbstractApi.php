@@ -54,6 +54,28 @@ abstract class AbstractApi
     protected function createOptionsResolver(): OptionsResolver
     {
         $resolver = new OptionsResolver();
+        $resolver->setDefined('firstname')
+            ->setAllowedTypes('firstname', 'string');
+        $resolver->setDefined('lastname')
+            ->setAllowedTypes('lastname', 'string');
+        $resolver->setDefined('email')
+            ->setAllowedTypes('email', 'string');
+        $resolver->setDefined('password2')
+            ->setAllowedTypes('password2', 'string');
+        $resolver->setDefined('customfields')
+            ->setAllowedTypes('customfields', 'string');
+        $resolver->setDefined('address1')
+            ->setAllowedTypes('address1', 'string');
+        $resolver->setDefined('city')
+            ->setAllowedTypes('city', 'string');
+        $resolver->setDefined('state')
+            ->setAllowedTypes('state', 'string');
+        $resolver->setDefined('postcode')
+            ->setAllowedTypes('postcode', 'string');
+        $resolver->setDefined('country')
+            ->setAllowedTypes('country', 'string');
+        $resolver->setDefined('number')
+            ->setAllowedTypes('number', 'string');
         $resolver->setDefined('search')
             ->setAllowedTypes('search', 'string');
         $resolver->setDefined('limitstart')
