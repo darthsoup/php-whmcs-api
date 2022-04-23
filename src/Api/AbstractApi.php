@@ -78,6 +78,19 @@ abstract class AbstractApi
             ->setAllowedTypes('number', 'string');
         $resolver->setDefined('search')
             ->setAllowedTypes('search', 'string');
+        $resolver->setDefined('messagename')
+            ->setAllowedTypes('messagename', 'string');            
+        $resolver->setDefined('customvars')
+            ->setAllowedTypes('customvars', 'string');            
+        $resolver->setDefined('customsubject')
+            ->setAllowedTypes('customsubject', 'string');            
+        $resolver->setDefined('custommessage')
+            ->setAllowedTypes('custommessage', 'string');            
+        $resolver->setDefined('customtype')
+            ->setAllowedTypes('customtype', 'string');            
+        $resolver->setDefined('id')
+            ->setAllowedTypes('id', 'int');
+
         $resolver->setDefined('limitstart')
             ->setAllowedTypes('limitstart', 'int')
             ->setAllowedValues('limitstart', function ($value): bool {
