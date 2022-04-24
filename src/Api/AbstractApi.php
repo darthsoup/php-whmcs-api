@@ -54,8 +54,43 @@ abstract class AbstractApi
     protected function createOptionsResolver(): OptionsResolver
     {
         $resolver = new OptionsResolver();
+        $resolver->setDefined('firstname')
+            ->setAllowedTypes('firstname', 'string');
+        $resolver->setDefined('lastname')
+            ->setAllowedTypes('lastname', 'string');
+        $resolver->setDefined('email')
+            ->setAllowedTypes('email', 'string');
+        $resolver->setDefined('password2')
+            ->setAllowedTypes('password2', 'string');
+        $resolver->setDefined('customfields')
+            ->setAllowedTypes('customfields', 'string');
+        $resolver->setDefined('address1')
+            ->setAllowedTypes('address1', 'string');
+        $resolver->setDefined('city')
+            ->setAllowedTypes('city', 'string');
+        $resolver->setDefined('state')
+            ->setAllowedTypes('state', 'string');
+        $resolver->setDefined('postcode')
+            ->setAllowedTypes('postcode', 'string');
+        $resolver->setDefined('country')
+            ->setAllowedTypes('country', 'string');
+        $resolver->setDefined('number')
+            ->setAllowedTypes('number', 'string');
         $resolver->setDefined('search')
             ->setAllowedTypes('search', 'string');
+        $resolver->setDefined('messagename')
+            ->setAllowedTypes('messagename', 'string');            
+        $resolver->setDefined('customvars')
+            ->setAllowedTypes('customvars', 'string');            
+        $resolver->setDefined('customsubject')
+            ->setAllowedTypes('customsubject', 'string');            
+        $resolver->setDefined('custommessage')
+            ->setAllowedTypes('custommessage', 'string');            
+        $resolver->setDefined('customtype')
+            ->setAllowedTypes('customtype', 'string');            
+        $resolver->setDefined('id')
+            ->setAllowedTypes('id', 'int');
+
         $resolver->setDefined('limitstart')
             ->setAllowedTypes('limitstart', 'int')
             ->setAllowedValues('limitstart', function ($value): bool {
