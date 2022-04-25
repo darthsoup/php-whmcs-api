@@ -12,6 +12,7 @@ use DarthSoup\WhmcsApi\Api\Client;
 use DarthSoup\WhmcsApi\Api\Custom;
 use DarthSoup\WhmcsApi\Api\Domains;
 use DarthSoup\WhmcsApi\Api\Orders;
+use DarthSoup\WhmcsApi\Api\Products;
 use DarthSoup\WhmcsApi\Api\Servers;
 use DarthSoup\WhmcsApi\Api\Service;
 use DarthSoup\WhmcsApi\Api\System;
@@ -52,6 +53,11 @@ trait ApiClassTrait
     public function orders(): Orders
     {
         return new Orders($this);
+    }
+
+    public function products(): Products
+    {
+        return new Products($this);
     }
 
     public function servers(): Servers
