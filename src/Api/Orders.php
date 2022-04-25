@@ -18,7 +18,23 @@ class Orders extends AbstractApi
     {
         return $this->send(
             'AddOrder',
-            array_merge(['clientId' => $clientId], $this->createOptionsResolver()->resolve($parameters))
+            array_merge(['clientid' => $clientId], $this->createOptionsResolver()->resolve($parameters))
+        );
+    }
+
+    public function GetProducts(array $parameters = [])
+    {
+        return $this->send(
+            'GetProducts',
+            array_merge($this->createOptionsResolver()->resolve($parameters))
+        );
+    }
+    
+    public function UpdateClientProduct(array $parameters = [])
+    {
+        return $this->send(
+            'UpdateClientProduct',
+            array_merge($this->createOptionsResolver()->resolve($parameters))
         );
     }
 
