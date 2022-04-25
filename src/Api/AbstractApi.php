@@ -20,6 +20,18 @@ abstract class AbstractApi
         self::SORT_DESC
     ];
 
+    public const STATUS_ORDER = ['Pending', 'Active', 'Fraud', 'Cancelled'];
+    public const STATUS_CLIENT = ['Active', 'Inactive', 'Closed'];
+    public const STATUS_INVOICE = [
+        'Draft', 'Unpaid', 'Paid', 'Cancelled',
+        'Refunded', 'Collections', 'Payment Pending',
+    ];
+    public const STATUS_PRODUCT = [
+        'Suspended', 'Terminated', 'Completed', 'Pending',
+        'Pending Registration', 'Pending Transfer', 'Grace',
+        'Redemption', 'Expired', 'Cancelled', 'Fraud', 'Transferred Away'
+    ];
+
     protected Client $client;
 
     public function __construct(Client $client)
@@ -76,12 +88,13 @@ abstract class AbstractApi
             ->setAllowedTypes('country', 'string');
         $resolver->setDefined('number')
             ->setAllowedTypes('number', 'string');
-        $resolver->setDefined('search')
-            ->setAllowedTypes('search', 'string');
 
         $resolver->setDefined('id')
             ->setAllowedTypes('id', 'int');
-
+        $resolver->setDefined('search')
+            ->setAllowedTypes('search', 'string');
+        $resolver->setDefined('module')
+            ->setAllowedTypes('module', 'string');
         $resolver->setDefined('limitstart')
             ->setAllowedTypes('limitstart', 'int')
             ->setAllowedValues('limitstart', function ($value): bool {
@@ -100,19 +113,11 @@ abstract class AbstractApi
             ->setAllowedValues('orderby', ['id', 'invoicenumber', 'date', 'duedate', 'total', 'status']);
         $resolver->setDefined('status')
             ->setAllowedValues('status', [
-                // Client
-                'Active', 'Inactive', 'Closed',
-
-                // Invoice
-                'Draft', 'Unpaid', 'Paid', 'Cancelled',
-                'Refunded', 'Collections', 'Payment Pending',
-
-                // Product - DomainStatus
-                'Suspended', 'Terminated', 'Completed', 'Pending',
-                'Pending Registration', 'Pending Transfer', 'Grace',
-                'Redemption', 'Expired', 'Cancelled', 'Fraud', 'Transferred Away'
+                ...self::STATUS_ORDER,
+                ...self::STATUS_CLIENT,
+                ...self::STATUS_INVOICE,
+                ...self::STATUS_PRODUCT,
             ]);
-
 
         return $resolver;
     }
