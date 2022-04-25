@@ -11,8 +11,14 @@ class Servers extends AbstractApi
         return $this->send('GetHealthStatus', ['fetchStatus' => $fetchStatus]);
     }
 
-    public function GetServers(bool $fetchStatus = false)
+    public function getServers(array $parameters = [])
     {
-        return $this->send('GetServers', ['fetchStatus' => $fetchStatus]);
+        $resolver = $this->createOptionsResolver();
+        $resolver->setDefined(['serviceId', 'addonId', 'fetchStatus']);
+        $resolver->setAllowedTypes('serviceId', 'int');
+        $resolver->setAllowedTypes('addonId', 'int');
+        $resolver->setAllowedTypes('fetchStatus', 'bool');
+
+        return $this->send('GetServers', $resolver->resolve($parameters));
     }
 }

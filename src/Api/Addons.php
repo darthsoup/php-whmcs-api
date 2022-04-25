@@ -8,9 +8,10 @@ class Addons extends AbstractApi
 {
     public function updateClientAddon(array $parameters = [])
     {
-        return $this->send(
-            'UpdateClientAddon',
-            $this->createOptionsResolver()->resolve($parameters)
-        );
+        $resolver = $this->createOptionsResolver();
+
+        $resolver->setRequired('id');
+
+        return $this->send('UpdateClientAddon', $resolver->resolve($parameters));
     }
 }

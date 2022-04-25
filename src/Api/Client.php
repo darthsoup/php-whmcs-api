@@ -22,14 +22,6 @@ class Client extends AbstractApi
         );
     }
 
-    public function sendMail(array $parameters = [])
-    {
-        return $this->send(
-            'SendEmail',
-            $this->createOptionsResolver()->resolve($parameters)
-        );
-    }
-
     public function closeClient(int $clientId)
     {
         return $this->send(
