@@ -54,6 +54,29 @@ abstract class AbstractApi
     protected function createOptionsResolver(): OptionsResolver
     {
         $resolver = new OptionsResolver();
+
+
+        $resolver->setDefined('billingcycle')
+            ->setAllowedTypes('billingcycle', 'string');
+        $resolver->setDefined('serviceid')
+            ->setAllowedTypes('serviceid', 'int');
+        $resolver->setDefined('serverid')
+            ->setAllowedTypes('serverid', 'int');
+        $resolver->setDefined('paymentmethod')
+            ->setAllowedTypes('paymentmethod', 'string');
+        $resolver->setDefined('domain')
+            ->setAllowedTypes('domain', 'string');
+        $resolver->setDefined('client_id')
+            ->setAllowedTypes('client_id', 'int');
+
+
+
+        $resolver->setDefined('search')
+            ->setAllowedTypes('search', 'string');
+
+        $resolver->setDefined('pid')
+            ->setAllowedTypes('pid', 'int');
+
         $resolver->setDefined('firstname')
             ->setAllowedTypes('firstname', 'string');
         $resolver->setDefined('lastname')
@@ -76,8 +99,7 @@ abstract class AbstractApi
             ->setAllowedTypes('country', 'string');
         $resolver->setDefined('number')
             ->setAllowedTypes('number', 'string');
-        $resolver->setDefined('search')
-            ->setAllowedTypes('search', 'string');
+            
         $resolver->setDefined('messagename')
             ->setAllowedTypes('messagename', 'string');            
         $resolver->setDefined('customvars')
@@ -111,11 +133,9 @@ abstract class AbstractApi
             ->setAllowedValues('status', [
                 // Client
                 'Active', 'Inactive', 'Closed',
-
                 // Invoice
                 'Draft', 'Unpaid', 'Paid', 'Cancelled',
                 'Refunded', 'Collections', 'Payment Pending',
-
                 // Product - DomainStatus
                 'Suspended', 'Terminated', 'Completed', 'Pending',
                 'Pending Registration', 'Pending Transfer', 'Grace',
