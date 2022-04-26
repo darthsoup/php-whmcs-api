@@ -98,21 +98,17 @@ abstract class AbstractApi
         $resolver->setDefined('customfields')
             ->setAllowedTypes('customfields', 'string');
 
-
-        $resolver->setDefined('search')
-            ->setAllowedTypes('search', 'string');
-        $resolver->setDefined('module')
-            ->setAllowedTypes('module', 'string');
-
         $resolver->setDefined('ip')
             ->setAllowedTypes('ip', 'string')
             ->setInfo('ip', 'Must be a valid ipv4/6')
             ->setAllowedValues('ip', fn($value): bool => filter_var($value, FILTER_VALIDATE_IP, FILTER_FLAG_IPV4 | FILTER_FLAG_IPV6));
         $resolver->setDefined('clientip')
-            ->setAllowedTypes('ip', 'string')
-            ->setInfo('ip', 'Must be a valid ipv4/6')
-            ->setAllowedValues('ip', fn($value): bool => filter_var($value, FILTER_VALIDATE_IP, FILTER_FLAG_IPV4 | FILTER_FLAG_IPV6));
+            ->setAllowedTypes('clientip', 'string')
+            ->setInfo('clientip', 'Must be a valid ipv4/6')
+            ->setAllowedValues('clientip', fn($value): bool => filter_var($value, FILTER_VALIDATE_IP, FILTER_FLAG_IPV4 | FILTER_FLAG_IPV6));
 
+        $resolver->setDefined('search')
+            ->setAllowedTypes('search', 'string');
 
         $resolver->setDefined('limitstart')
             ->setAllowedTypes('limitstart', 'int')

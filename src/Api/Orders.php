@@ -9,22 +9,18 @@ class Orders extends AbstractApi
     public function acceptOrder(array $parameters = [])
     {
         $resolver = $this->createOptionsResolver();
-        $resolver->setDefined('orderid')
-            ->setAllowedTypes('orderid', 'int');
-        $resolver->setDefined('serverid')
-            ->setAllowedTypes('serverid', 'int');
-        $resolver->setDefined('serviceusername')
-            ->setAllowedTypes('serviceusername', 'string');
-        $resolver->setDefined('servicepassword')
-            ->setAllowedTypes('servicepassword', 'string');
-        $resolver->setDefined('registrar')
-            ->setAllowedTypes('registrar', 'string');
-        $resolver->setDefined('sendregistrar')
-            ->setAllowedTypes('sendregistrar', 'bool');
-        $resolver->setDefined('autosetup')
-            ->setAllowedTypes('autosetup', 'bool');
-        $resolver->setDefined('sendemail')
-            ->setAllowedTypes('sendemail', 'bool');
+        $resolver->setDefined([
+            'orderid', 'serverid', 'serviceusername', 'servicepassword', 'registrar',
+            'sendregistrar', 'autosetup', 'sendemail',
+        ]);
+        $resolver->setAllowedTypes('orderid', 'int');
+        $resolver->setAllowedTypes('serverid', 'int');
+        $resolver->setAllowedTypes('serviceusername', 'string');
+        $resolver->setAllowedTypes('servicepassword', 'string');
+        $resolver->setAllowedTypes('registrar', 'string');
+        $resolver->setAllowedTypes('sendregistrar', 'bool');
+        $resolver->setAllowedTypes('autosetup', 'bool');
+        $resolver->setAllowedTypes('sendemail', 'bool');
 
         $resolver->setRequired('orderid');
 
@@ -34,86 +30,53 @@ class Orders extends AbstractApi
     public function addOrder(array $parameters = [])
     {
         $resolver = $this->createOptionsResolver();
-
-        $resolver->setDefined('clientid')
-            ->setAllowedTypes('clientid', 'int');
-        $resolver->setDefined('paymentmethod')
-            ->setAllowedTypes('paymentmethod', 'string');
-        $resolver->setDefined('pid')
-            ->setAllowedTypes('pid', 'int[]');
-        $resolver->setDefined('billingcycle')
-            ->setAllowedTypes('billingcycle', 'string[]');
-        $resolver->setDefined('domaintype')
-            ->setAllowedTypes('domaintype', 'string[]');
-        $resolver->setDefined('regperiod')
-            ->setAllowedTypes('regperiod', 'int[]');
-        $resolver->setDefined('idnlanguage')
-            ->setAllowedTypes('idnlanguage', 'string[]');
-        $resolver->setDefined('eppcode')
-            ->setAllowedTypes('eppcode', 'string[]');
-        $resolver->setDefined('nameserver1')
-            ->setAllowedTypes('nameserver1', 'string');
-        $resolver->setDefined('nameserver2')
-            ->setAllowedTypes('nameserver2', 'string');
-        $resolver->setDefined('nameserver3')
-            ->setAllowedTypes('nameserver3', 'string');
-        $resolver->setDefined('nameserver4')
-            ->setAllowedTypes('nameserver4', 'string');
-        $resolver->setDefined('nameserver5')
-            ->setAllowedTypes('nameserver5', 'string');
-        $resolver->setDefined('customfields')
-            ->setAllowedTypes('customfields', 'string[]');
-        $resolver->setDefined('configoptions')
-            ->setAllowedTypes('configoptions', 'string[]');
-        $resolver->setDefined('priceoverride')
-            ->setAllowedTypes('priceoverride', 'float[]');
-        $resolver->setDefined('promocode')
-            ->setAllowedTypes('promocode', 'string');
-        $resolver->setDefined('promooverride')
-            ->setAllowedTypes('promooverride', 'bool');
-        $resolver->setDefined('affid')
-            ->setAllowedTypes('affid', 'int');
-        $resolver->setDefined('noinvoice')
-            ->setAllowedTypes('noinvoice', 'bool');
-        $resolver->setDefined('noinvoiceemail')
-            ->setAllowedTypes('noinvoiceemail', 'bool');
-        $resolver->setDefined('noemail')
-            ->setAllowedTypes('noemail', 'bool');
-        $resolver->setDefined('addons')
-            ->setAllowedTypes('addons', 'string[]');
-        $resolver->setDefined('hostname')
-            ->setAllowedTypes('hostname', 'string[]');
-        $resolver->setDefined('ns1prefix')
-            ->setAllowedTypes('ns1prefix', 'string[]');
-        $resolver->setDefined('ns2prefix')
-            ->setAllowedTypes('ns2prefix', 'string[]');
-        $resolver->setDefined('rootpw')
-            ->setAllowedTypes('rootpw', 'string[]');
-        $resolver->setDefined('contactid')
-            ->setAllowedTypes('contactid', 'int');
-        $resolver->setDefined('dnsmanagement')
-            ->setAllowedTypes('dnsmanagement', 'bool[]');
-        $resolver->setDefined('domainfields')
-            ->setAllowedTypes('domainfields', 'string[]');
-        $resolver->setDefined('emailforwarding')
-            ->setAllowedTypes('emailforwarding', 'bool[]');
-        $resolver->setDefined('idprotection')
-            ->setAllowedTypes('idprotection', 'bool[]');
-        $resolver->setDefined('domainpriceoverride')
-            ->setAllowedTypes('domainpriceoverride', 'float[]');
-        $resolver->setDefined('domainrenewoverride')
-            ->setAllowedTypes('domainrenewoverride', 'float[]');
-        $resolver->setDefined('domainrenewals')
-            ->setAllowedTypes('domainrenewals', 'array');
-        $resolver->setDefined('addonid')
-            ->setAllowedTypes('addonid', 'int');
-        $resolver->setDefined('serviceid')
-            ->setAllowedTypes('serviceid', 'int');
-        $resolver->setDefined('addonids')
-            ->setAllowedTypes('addonids', 'int[]');
-        $resolver->setDefined('serviceids')
-            ->setAllowedTypes('serviceids', 'int[]');
-
+        $resolver->setDefined([
+            'clientid', 'paymentmethod', 'pid', 'billingcycle', 'domaintype', 'regperiod', 'idnlanguage', 'eppcode',
+            'nameserver1', 'nameserver2', 'nameserver3', 'nameserver4', 'nameserver5', 'customfields', 'configoptions',
+            'priceoverride', 'promocode', 'promooverride', 'affid', 'noinvoice', 'noinvoiceemail', 'noemail', 'addons',
+            'hostname', 'ns1prefix', 'ns2prefix', 'rootpw', 'contactid', 'dnsmanagement', 'domainfields',
+            'emailforwarding', 'idprotection', 'domainpriceoverride', 'domainrenewoverride', 'domainrenewals',
+            'addonid', 'serviceid', 'addonids', 'serviceids',
+        ]);
+        $resolver->setAllowedTypes('clientid', 'int');
+        $resolver->setAllowedTypes('paymentmethod', 'string');
+        $resolver->setAllowedTypes('pid', 'int[]');
+        $resolver->setAllowedTypes('billingcycle', 'string[]');
+        $resolver->setAllowedTypes('domaintype', 'string[]');
+        $resolver->setAllowedTypes('regperiod', 'int[]');
+        $resolver->setAllowedTypes('idnlanguage', 'string[]');
+        $resolver->setAllowedTypes('eppcode', 'string[]');
+        $resolver->setAllowedTypes('nameserver1', 'string');
+        $resolver->setAllowedTypes('nameserver2', 'string');
+        $resolver->setAllowedTypes('nameserver3', 'string');
+        $resolver->setAllowedTypes('nameserver4', 'string');
+        $resolver->setAllowedTypes('nameserver5', 'string');
+        $resolver->setAllowedTypes('customfields', 'string[]');
+        $resolver->setAllowedTypes('configoptions', 'string[]');
+        $resolver->setAllowedTypes('priceoverride', 'float[]');
+        $resolver->setAllowedTypes('promocode', 'string');
+        $resolver->setAllowedTypes('promooverride', 'bool');
+        $resolver->setAllowedTypes('affid', 'int');
+        $resolver->setAllowedTypes('noinvoice', 'bool');
+        $resolver->setAllowedTypes('noinvoiceemail', 'bool');
+        $resolver->setAllowedTypes('noemail', 'bool');
+        $resolver->setAllowedTypes('addons', 'string[]');
+        $resolver->setAllowedTypes('hostname', 'string[]');
+        $resolver->setAllowedTypes('ns1prefix', 'string[]');
+        $resolver->setAllowedTypes('ns2prefix', 'string[]');
+        $resolver->setAllowedTypes('rootpw', 'string[]');
+        $resolver->setAllowedTypes('contactid', 'int');
+        $resolver->setAllowedTypes('dnsmanagement', 'bool[]');
+        $resolver->setAllowedTypes('domainfields', 'string[]');
+        $resolver->setAllowedTypes('emailforwarding', 'bool[]');
+        $resolver->setAllowedTypes('idprotection', 'bool[]');
+        $resolver->setAllowedTypes('domainpriceoverride', 'float[]');
+        $resolver->setAllowedTypes('domainrenewoverride', 'float[]');
+        $resolver->setAllowedTypes('domainrenewals', 'array');
+        $resolver->setAllowedTypes('addonid', 'int');
+        $resolver->setAllowedTypes('serviceid', 'int');
+        $resolver->setAllowedTypes('addonids', 'int[]');
+        $resolver->setAllowedTypes('serviceids', 'int[]');
         $resolver->setRequired(['clientId', 'paymentmethod']);
 
         return $this->send('AddOrder', $resolver->resolve($parameters));
@@ -122,14 +85,10 @@ class Orders extends AbstractApi
     public function cancelOrder(array $parameters = [])
     {
         $resolver = $this->createOptionsResolver();
-
-        $resolver->setDefined('orderid')
-            ->setAllowedTypes('orderid', 'int');
-        $resolver->setDefined('cancelsub')
-            ->setAllowedTypes('cancelsub', 'bool');
-        $resolver->setDefined('noemail')
-            ->setAllowedTypes('noemail', 'bool');
-
+        $resolver->setDefined(['orderid', 'cancelsub', 'noemail']);
+        $resolver->setAllowedTypes('orderid', 'int');
+        $resolver->setAllowedTypes('cancelsub', 'bool');
+        $resolver->setAllowedTypes('noemail', 'bool');
         $resolver->setRequired(['orderid']);
 
         return $this->send('CancelOrder', $resolver->resolve($parameters));
@@ -148,11 +107,9 @@ class Orders extends AbstractApi
     public function getOrders(array $parameters = [])
     {
         $resolver = $this->createOptionsResolver();
-
-        $resolver->setDefined('userid')
-            ->setAllowedTypes('userid', 'int');
-        $resolver->setDefined('requestor_id')
-            ->setAllowedTypes('requestor_id', 'int');
+        $resolver->setDefined(['userid', 'requestor_id']);
+        $resolver->setAllowedTypes('userid', 'int');
+        $resolver->setAllowedTypes('requestor_id', 'int');
 
         return $this->send('GetOrders', $resolver->resolve($parameters));
     }
@@ -165,11 +122,10 @@ class Orders extends AbstractApi
     public function getProducts(array $parameters = [])
     {
         $resolver = $this->createOptionsResolver();
-
-        $resolver->setDefined('pid')
-            ->setAllowedTypes('pid', 'int');
-        $resolver->setDefined('gid')
-            ->setAllowedTypes('gid', 'int');
+        $resolver->setDefined(['pid', 'gpid', 'module']);
+        $resolver->setAllowedTypes('pid', 'int');
+        $resolver->setAllowedTypes('gid', 'int');
+        $resolver->setAllowedTypes('module', 'string');
 
         return $this->send('GetProducts', $resolver->resolve($parameters));
     }
@@ -177,9 +133,8 @@ class Orders extends AbstractApi
     public function getPromotions(array $parameters = [])
     {
         $resolver = $this->createOptionsResolver();
-
-        $resolver->setDefined('code')
-            ->setAllowedTypes('code', 'string');
+        $resolver->setDefined(['code']);
+        $resolver->setAllowedTypes('code', 'string');
 
         return $this->send('getPromotions', $resolver->resolve($parameters));
     }
@@ -188,15 +143,8 @@ class Orders extends AbstractApi
     {
         $resolver = $this->createOptionsResolver();
 
-        $resolver->setDefined('orderid')
-            ->setAllowedTypes('orderid', 'int');
-        $resolver->setDefined('ip')
-            ->setAllowedTypes('ip', 'string')
-            ->setInfo('ip', 'Must be a valid ipv4/6')
-            ->setAllowedValues('ip', function ($value): bool {
-                return filter_var($value, FILTER_VALIDATE_IP, FILTER_FLAG_IPV4 | FILTER_FLAG_IPV6);
-            });
-
+        $resolver->setDefined(['orderid']);
+        $resolver->setAllowedTypes('orderid', 'int');
         $resolver->setRequired('orderid');
 
         return $this->send('OrderFraudCheck', $resolver->resolve($parameters));

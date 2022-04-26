@@ -14,11 +14,8 @@ class Affiliates extends AbstractApi
     public function getAffiliates(array $parameters = [])
     {
         $resolver = $this->createOptionsResolver();
-        $resolver->setDefined(['limitstart', 'limitnum', 'userid', 'visitors', 'paytype', 'payamount', 'onetime', 'balance', 'withdrawn']);
+        $resolver->setDefined(['userid', 'visitors', 'paytype', 'payamount', 'onetime', 'balance', 'withdrawn']);
 
-        return $this->send(
-            'GetAffiliates',
-            $resolver->resolve($parameters)
-        );
+        return $this->send('GetAffiliates', $resolver->resolve($parameters));
     }
 }
