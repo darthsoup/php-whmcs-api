@@ -70,14 +70,12 @@ abstract class AbstractApi
             ->setAllowedTypes('firstname', 'string');
         $resolver->setDefined('lastname')
             ->setAllowedTypes('lastname', 'string');
-        $resolver->setDefined('email')
-            ->setAllowedTypes('email', 'string');
-        $resolver->setDefined('password2')
-            ->setAllowedTypes('password2', 'string');
-        $resolver->setDefined('customfields')
-            ->setAllowedTypes('customfields', 'string');
         $resolver->setDefined('address1')
             ->setAllowedTypes('address1', 'string');
+        $resolver->setDefined('companyname')
+            ->setAllowedTypes('companyname', 'string');
+        $resolver->setDefined('address2')
+            ->setAllowedTypes('address2', 'string');
         $resolver->setDefined('city')
             ->setAllowedTypes('city', 'string');
         $resolver->setDefined('state')
@@ -88,29 +86,48 @@ abstract class AbstractApi
             ->setAllowedTypes('country', 'string');
         $resolver->setDefined('number')
             ->setAllowedTypes('number', 'string');
+        $resolver->setDefined('phonenumber')
+            ->setAllowedTypes('phonenumber', 'string');
 
-        $resolver->setDefined('id')
-            ->setAllowedTypes('id', 'int');
+        $resolver->setDefined('email')
+            ->setAllowedTypes('email', 'string')
+            ->setAllowedValues('email', fn($value): bool => filter_var($value, FILTER_VALIDATE_EMAIL));
+        $resolver->setDefined('password2')
+            ->setAllowedTypes('password2', 'string');
+
+        $resolver->setDefined('customfields')
+            ->setAllowedTypes('customfields', 'string');
+
+
         $resolver->setDefined('search')
             ->setAllowedTypes('search', 'string');
         $resolver->setDefined('module')
             ->setAllowedTypes('module', 'string');
+
+        $resolver->setDefined('ip')
+            ->setAllowedTypes('ip', 'string')
+            ->setInfo('ip', 'Must be a valid ipv4/6')
+            ->setAllowedValues('ip', fn($value): bool => filter_var($value, FILTER_VALIDATE_IP, FILTER_FLAG_IPV4 | FILTER_FLAG_IPV6));
+        $resolver->setDefined('clientip')
+            ->setAllowedTypes('ip', 'string')
+            ->setInfo('ip', 'Must be a valid ipv4/6')
+            ->setAllowedValues('ip', fn($value): bool => filter_var($value, FILTER_VALIDATE_IP, FILTER_FLAG_IPV4 | FILTER_FLAG_IPV6));
+
+
         $resolver->setDefined('limitstart')
             ->setAllowedTypes('limitstart', 'int')
-            ->setAllowedValues('limitstart', function ($value): bool {
-                return $value > 0;
-            });
+            ->setAllowedValues('limitstart', fn($value): bool => $value > 0);
         $resolver->setDefined('limitnum')
             ->setAllowedTypes('limitnum', 'int')
-            ->setAllowedValues('limitnum', function ($value): bool {
-                return $value > 0 && $value <= 250;
-            });
+            ->setAllowedValues('limitnum', fn($value): bool => $value > 0 && $value <= 250);
+
         $resolver->setDefined('sorting')
             ->setAllowedValues('sorting', self::SORTING);
         $resolver->setDefined('sortOrder')
             ->setAllowedValues('sortOrder', self::SORTING);
         $resolver->setDefined('orderby')
-            ->setAllowedValues('orderby', ['id', 'invoicenumber', 'date', 'duedate', 'total', 'status']);
+            ->setAllowedTypes('orderby', 'string');
+
         $resolver->setDefined('status')
             ->setAllowedValues('status', [
                 ...self::STATUS_ORDER,

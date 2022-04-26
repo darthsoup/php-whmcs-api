@@ -4,30 +4,39 @@ declare(strict_types=1);
 
 namespace DarthSoup\WhmcsApi\Api;
 
+use Symfony\Component\OptionsResolver\OptionsResolver;
+
 class Client extends AbstractApi
 {
     public function addClient(array $parameters = [])
     {
-        return $this->send(
-            'AddClient',
-            $this->createOptionsResolver()->resolve($parameters)
-        );
+        $resolver = $this->createOptionsResolver();
+        $resolver->setDefined([
+            'owner_user_id', 'firstname', 'lastname', 'companyname', 'email', 'address1', 'address2', 'city',
+            'state', 'postcode', 'country', 'phonenumber', 'tax_id', 'password2', 'securityqid', 'securityqans',
+            'currency', 'groupid', 'customfields', 'language', 'clientip', 'notes', 'marketingoptin',
+            'noemail', 'skipvalidation',
+        ]);
+        $resolver->setRequired(['firstname', 'lastname', 'email', 'address1', 'city', 'state', 'postcode', 'country', 'phonenumber',]);
+
+        return $this->send('AddClient', $resolver->resolve($parameters));
     }
 
     public function addContact(array $parameters = [])
     {
-        return $this->send(
-            'AddContact',
-            $this->createOptionsResolver()->resolve($parameters)
-        );
+        $resolver = $this->createOptionsResolver();
+        $resolver->setDefined([
+            'firstname', 'lastname', 'companyname', 'email', 'address1', 'address2', 'city', 'state', 'postcode',
+            'country', 'phonenumber', 'tax_id',
+        ]);
+        $resolver->setRequired(['clientid']);
+
+        return $this->send('AddContact', $resolver->resolve($parameters));
     }
 
     public function closeClient(int $clientId)
     {
-        return $this->send(
-            'CloseClient',
-            ['clientid' => $clientId]
-        );
+        return $this->send('CloseClient', ['clientid' => $clientId]);
     }
 
     public function deleteClient(int $clientId, bool $deleteUsers = false, bool $deleteTransactions = false)
@@ -46,10 +55,7 @@ class Client extends AbstractApi
 
     public function getCancelledPackages(array $parameters = [])
     {
-        return $this->send(
-            'GetCancelledPackages',
-            $this->createOptionsResolver()->resolve($parameters)
-        );
+        return $this->send('GetCancelledPackages', $this->createOptionsResolver()->resolve($parameters));
     }
 
     public function getClientGroups()
@@ -59,81 +65,107 @@ class Client extends AbstractApi
 
     public function getClientPassword(array $parameters = [])
     {
-        return $this->send(
-            'GetClientPassword',
-            $this->createOptionsResolver()->resolve($parameters)
-        );
+        return $this->send('GetClientPassword', $this->createOptionsResolver()->resolve($parameters));
     }
 
     public function getClients(array $parameters = [])
     {
-        return $this->send(
-            'GetClients',
-            $this->createOptionsResolver()->resolve($parameters)
-        );
+        $resolver = $this->createOptionsResolver();
+        $resolver->setAllowedValues('orderby', ['id', 'invoicenumber', 'date', 'duedate', 'total', 'status']);
+
+        return $this->send('GetClients', $resolver->resolve($parameters));
     }
 
     public function getClientsAddons(array $parameters = [])
     {
-        return $this->send(
-            'GetClientsAddons',
-            $this->createOptionsResolver()->resolve($parameters)
-        );
+        $resolver = $this->createOptionsResolver();
+        $resolver->setDefined(['serviceid', 'clientid', 'addonid']);
+        $resolver->setAllowedTypes('serviceid', 'int');
+        $resolver->setAllowedTypes('clientid', 'int');
+        $resolver->setAllowedTypes('addonid', 'int');
+
+        return $this->send('GetClientsAddons', $resolver->resolve($parameters));
     }
 
     public function getClientsDetails(array $parameters = [])
     {
-        return $this->send(
-            'GetClientsDetails',
-            $this->createOptionsResolver()->resolve($parameters)
-        );
+        $resolver = $this->createOptionsResolver();
+        $resolver->setDefined(['clientid', 'email', 'stats']);
+        $resolver->setAllowedTypes('clientid', 'int');
+        $resolver->setAllowedTypes('email', 'string');
+        $resolver->setAllowedTypes('stats', 'bool');
+
+        return $this->send('GetClientsDetails', $resolver->resolve($parameters));
     }
 
     public function getClientsDomains(array $parameters = [])
     {
-        return $this->send(
-            'GetClientsDomains',
-            $this->createOptionsResolver()->resolve($parameters)
-        );
+        $resolver = $this->createOptionsResolver();
+        $resolver->setDefined(['clientid', 'domainid', 'domain']);
+        $resolver->setAllowedTypes('clientid', 'int');
+        $resolver->setAllowedTypes('domainid', 'int');
+        $resolver->setAllowedTypes('domain', 'string');
+
+        return $this->send('GetClientsDomains', $resolver->resolve($parameters));
     }
 
     public function getClientsProducts(array $parameters = [])
     {
-        return $this->send(
-            'GetClientsProducts',
-            $this->createOptionsResolver()->resolve($parameters)
-        );
+        $resolver = $this->createOptionsResolver();
+        $resolver->setDefined(['clientid', 'serviceid', 'pid', 'domain', 'username2']);
+        $resolver->setAllowedTypes('clientid', 'int');
+        $resolver->setAllowedTypes('serviceid', 'int');
+        $resolver->setAllowedTypes('pid', 'int');
+        $resolver->setAllowedTypes('domain', 'string');
+        $resolver->setAllowedTypes('username2', 'string');
+
+        return $this->send('GetClientsProducts', $resolver->resolve($parameters));
     }
 
     public function getContacts(array $parameters = [])
     {
-        return $this->send(
-            'GetContacts',
-            $this->createOptionsResolver()->resolve($parameters)
-        );
+        $resolver = $this->createOptionsResolver();
+        $resolver->setDefined(['userid']);
+        $resolver->setAllowedTypes('userid', 'int');
+
+        return $this->send('GetContacts', $resolver->resolve($parameters));
     }
 
-    public function getEmails(int $clientId, array $parameters = [])
+    public function getEmails(array $parameters = [])
     {
-        return $this->send(
-            'GetEmails',
-            array_merge(['clientId' => $clientId], $this->createOptionsResolver()->resolve($parameters))
-        );
+        $resolver = $this->createOptionsResolver();
+        $resolver->setDefined(['clientid', 'date', 'email']);
+        $resolver->setAllowedTypes('clientid', 'int');
+        $resolver->setAllowedTypes('date', 'string');
+        $resolver->setRequired(['clientid']);
+
+        return $this->send('GetEmails', $resolver->resolve($parameters));
     }
 
     public function updateClient(array $parameters = [])
     {
-        return $this->send(
-            'UpdateClient',
-            $this->createOptionsResolver()->resolve($parameters)
-        );
+        $resolver = $this->createOptionsResolver();
+        $resolver->setDefined([
+            'clientid', 'tax_id', 'currency', 'groupid', 'customfields', 'language', 'clientip', 'notes',
+            'status', 'paymentmethod', 'marketingoptin', 'clearcreditcard', 'skipvalidation', 'latefeeoveride',
+            'overideduenotices', 'taxexempt', 'separateinvoices', 'disableautocc', 'overrideautoclose',
+        ]);
+        $resolver->setAllowedTypes('clientid', 'int');
+        $resolver->setAllowedValues('status', self::STATUS_CLIENT);
+
+        /* only support clientid for now */
+        $resolver->setRequired('clientid');
+
+        return $this->send('UpdateClient', $resolver->resolve($parameters));
     }
 
     public function updateContact(array $parameters = [])
     {
-        return $this->send(
-            'UpdateContact',
-            $this->createOptionsResolver()->resolve($parameters)
-        );
+        $resolver = $this->createOptionsResolver();
+        $resolver->setDefined(['contactid']);
+        $resolver->setAllowedTypes('contactid', 'int');
+        $resolver->setRequired('contactid');
+
+        return $this->send('UpdateContact', $resolver->resolve($parameters));
     }
 }
