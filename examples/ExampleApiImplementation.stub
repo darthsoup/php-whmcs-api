@@ -1,0 +1,18 @@
+<?php
+
+declare(strict_types=1);
+
+namespace DarthSoup\WhmcsApi\Api;
+
+class ExampleApiImplementation extends AbstractApi
+{
+    public function exampleEndpoint(array $parameters = [])
+    {
+        $resolver = $this->createOptionsResolver();
+        $resolver->setDefined(['parameter']);
+        $resolver->setAllowedTypes('parameter', 'string');
+        $resolver->setRequired(['parameter']);
+
+        return $this->send('ExampleEndpoint', $resolver->resolve($parameters));
+    }
+}
