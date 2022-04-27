@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace DarthSoup\WhmcsApi\Api;
 
-use Symfony\Component\OptionsResolver\OptionsResolver;
-
 class Client extends AbstractApi
 {
     public function addClient(array $parameters = [])
