@@ -4,20 +4,15 @@ declare(strict_types=1);
 
 namespace DarthSoup\WhmcsApi\HttpClient\Plugin;
 
-use DarthSoup\WhmcsApi\Client;
 use GuzzleHttp\Psr7\AppendStream;
 use GuzzleHttp\Psr7\Utils;
 use Http\Client\Common\Plugin;
 use Http\Promise\Promise;
 use Psr\Http\Message\RequestInterface;
-use RuntimeException;
 
 class AccessKey implements Plugin
 {
-    /**
-     * @var string
-     */
-    private $accessKey;
+    private string $accessKey;
 
     public function __construct(string $accessKey)
     {

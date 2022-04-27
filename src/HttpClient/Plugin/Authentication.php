@@ -15,20 +15,11 @@ use function sprintf;
 
 class Authentication implements Plugin
 {
-    /**
-     * @var string
-     */
-    private $method;
+    private string $method;
 
-    /**
-     * @var string
-     */
-    private $identifier;
+    private string $identifier;
 
-    /**
-     * @var string
-     */
-    private $secret;
+    private string $secret;
 
     public function __construct(string $method, string $identifier, string $secret)
     {

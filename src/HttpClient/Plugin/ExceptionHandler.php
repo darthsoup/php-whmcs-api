@@ -18,9 +18,9 @@ class ExceptionHandler implements Plugin
     public const ERROR_AUTH_FAILED = 'Authentication Failed';
     public const ERROR_AUTH_CREDENTIALS = 'Invalid or missing credentials';
     public const ERROR_AUTH_INVALID_PASSWORD = "Invalid password provided";
+    public const ERROR_AUTH_INVALID_IP = "Invalid IP";
     public const ERROR_AUTH_DISABLED = "Administrator Account Disabled";
     public const ERROR_AUTH_DENIED = "Access Denied";
-    public const ERROR_AUTH_INVALIDIP = "Invalid IP";
     public const ERROR_ACTION_EMPTY = "Empty action request";
 
     /**
@@ -55,7 +55,7 @@ class ExceptionHandler implements Plugin
             return new RuntimeException($message, $status);
         }
 
-        if (400 === $status && strpos($message, self::ERROR_AUTH_INVALIDIP)) {
+        if (400 === $status && strpos($message, self::ERROR_AUTH_INVALID_IP)) {
             return new IpBlockedException($message, $status);
         }
 

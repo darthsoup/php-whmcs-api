@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace DarthSoup\WhmcsApi\Api;
 
+use InvalidArgumentException;
+
 class Custom extends AbstractApi
 {
     /**
@@ -17,7 +19,7 @@ class Custom extends AbstractApi
         $parameters = $arguments[0] ?? [];
 
         if (!is_array($parameters)) {
-            throw new \InvalidArgumentException('The parameters must be an array.');
+            throw new InvalidArgumentException('The parameters must be an array.');
         }
 
         return $this->send($name, $parameters);

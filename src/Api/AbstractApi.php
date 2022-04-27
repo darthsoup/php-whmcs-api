@@ -63,9 +63,6 @@ abstract class AbstractApi
         return ResponseFormatter::format($response);
     }
 
-    /**
-     * @return OptionsResolver
-     */
     protected function createOptionsResolver(): OptionsResolver
     {
         $resolver = new OptionsResolver();
@@ -75,10 +72,10 @@ abstract class AbstractApi
             ->setAllowedTypes('lastname', 'string');
         $resolver->setDefined('address1')
             ->setAllowedTypes('address1', 'string');
-        $resolver->setDefined('companyname')
-            ->setAllowedTypes('companyname', 'string');
         $resolver->setDefined('address2')
             ->setAllowedTypes('address2', 'string');
+        $resolver->setDefined('companyname')
+            ->setAllowedTypes('companyname', 'string');
         $resolver->setDefined('city')
             ->setAllowedTypes('city', 'string');
         $resolver->setDefined('state')
@@ -99,7 +96,7 @@ abstract class AbstractApi
             ->setAllowedTypes('password2', 'string');
 
         $resolver->setDefined('customfields')
-            ->setAllowedTypes('customfields', 'string');
+            ->setAllowedTypes('customfields', 'string[]');
 
         $resolver->setDefined('ip')
             ->setAllowedTypes('ip', 'string')
@@ -110,9 +107,10 @@ abstract class AbstractApi
             ->setInfo('clientip', 'Must be a valid ipv4/6')
             ->setAllowedValues('clientip', fn($value): bool => filter_var($value, FILTER_VALIDATE_IP, FILTER_FLAG_IPV4 | FILTER_FLAG_IPV6));
 
+
+        // Global
         $resolver->setDefined('search')
             ->setAllowedTypes('search', 'string');
-
         $resolver->setDefined('limitstart')
             ->setAllowedTypes('limitstart', 'int')
             ->setAllowedValues('limitstart', fn($value): bool => $value > 0);
@@ -138,9 +136,6 @@ abstract class AbstractApi
         return $resolver;
     }
 
-    /**
-     * @return Client
-     */
     protected function getClient(): Client
     {
         return $this->client;
