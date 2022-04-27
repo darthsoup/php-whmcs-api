@@ -6,14 +6,14 @@ namespace DarthSoup\WhmcsApi\Api;
 
 class Users extends AbstractApi
 {
-    public function addUsers(array $parameters = [])
+    public function addUser(array $parameters = [])
     {
         $resolver = $this->createOptionsResolver();
         $resolver->setDefined(['language']);
         $resolver->setAllowedTypes('language', 'string');
         $resolver->setRequired(['firstname', 'lastname', 'email', 'password2']);
 
-        return $this->send('addUsers', $resolver->resolve($parameters));
+        return $this->send('AddUser', $resolver->resolve($parameters));
     }
 
     public function getUsers(array $parameters = [])
