@@ -31,6 +31,9 @@ abstract class AbstractApi
         'Pending Registration', 'Pending Transfer', 'Grace',
         'Redemption', 'Expired', 'Cancelled', 'Fraud', 'Transferred Away'
     ];
+    public const STATUS_BILLINGSTAGE = [
+        'Draft', 'Delivered', 'On', 'Hold', 'Accepted', 'Lost', 'Dead'
+    ];
 
     protected Client $client;
 
