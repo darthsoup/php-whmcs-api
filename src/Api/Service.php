@@ -52,17 +52,32 @@ class Service extends AbstractApi
 
     public function updateClientProduct(array $parameters = [])
     {
-        $this->send(
-            'UpdateClientProduct',
-            $this->createOptionsResolver()->resolve($parameters)
-        );
+        $resolver = $this->createOptionsResolver();
+        $resolver->setDefined([
+            'serviceid', 'pid', 'serverid', 'regdate', 'nextduedate', 'terminationdate', 'domain', 'firstpaymentamount',
+            'recurringamount', 'paymentmethod', 'billingcycle', 'subscriptionid', 'status', 'notes', 'serviceusername',
+            'servicepassword', 'overideautosuspend', 'overidesuspenduntil', 'ns1', 'ns2', 'dedicatedip', 'assignedips',
+            'diskusage', 'disklimit', 'bwusage', 'bwlimit', 'suspendreason', 'promoid', 'unset', 'autorecalc',
+            'customfields', 'configoptions'
+        ]);
+        $resolver->setAllowedTypes('serviceid', 'int');
+        $resolver->setRequired(['serviceid']);
+
+        return $this->send('UpdateClientProduct', $resolver->resolve($parameters));
     }
 
     public function upgradeProduct(array $parameters = [])
     {
-        $this->send(
-            'UpgradeProduct',
-            $this->createOptionsResolver()->resolve($parameters)
-        );
+        $resolver = $this->createOptionsResolver();
+        $resolver->setDefined([
+            'serviceid', 'calconly', 'paymentmethod', 'type', 'newproductid', 'newproductbillingcycle',
+            'promocode', 'configoptions'
+        ]);
+        $resolver->setAllowedTypes('serviceid', 'int');
+        $resolver->setAllowedTypes('paymentmethod', 'string');
+        $resolver->setAllowedTypes('type', 'string');
+        $resolver->setRequired(['serviceid', 'paymentmethod', 'type']);
+
+        return $this->send('UpgradeProduct', $resolver->resolve($parameters));
     }
 }
