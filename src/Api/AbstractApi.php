@@ -20,6 +20,21 @@ abstract class AbstractApi
         self::SORT_DESC
     ];
 
+    public const STATUS_ORDER = ['Pending', 'Active', 'Fraud', 'Cancelled'];
+    public const STATUS_CLIENT = ['Active', 'Inactive', 'Closed'];
+    public const STATUS_INVOICE = [
+        'Draft', 'Unpaid', 'Paid', 'Cancelled',
+        'Refunded', 'Collections', 'Payment Pending',
+    ];
+    public const STATUS_PRODUCT = [
+        'Suspended', 'Terminated', 'Completed', 'Pending',
+        'Pending Registration', 'Pending Transfer', 'Grace',
+        'Redemption', 'Expired', 'Cancelled', 'Fraud', 'Transferred Away'
+    ];
+    public const STATUS_BILLINGSTAGE = [
+        'Draft', 'Delivered', 'On', 'Hold', 'Accepted', 'Lost', 'Dead'
+    ];
+
     protected Client $client;
 
     public function __construct(Client $client)
@@ -58,14 +73,12 @@ abstract class AbstractApi
             ->setAllowedTypes('firstname', 'string');
         $resolver->setDefined('lastname')
             ->setAllowedTypes('lastname', 'string');
-        $resolver->setDefined('email')
-            ->setAllowedTypes('email', 'string');
-        $resolver->setDefined('password2')
-            ->setAllowedTypes('password2', 'string');
-        $resolver->setDefined('customfields')
-            ->setAllowedTypes('customfields', 'string');
         $resolver->setDefined('address1')
             ->setAllowedTypes('address1', 'string');
+        $resolver->setDefined('companyname')
+            ->setAllowedTypes('companyname', 'string');
+        $resolver->setDefined('address2')
+            ->setAllowedTypes('address2', 'string');
         $resolver->setDefined('city')
             ->setAllowedTypes('city', 'string');
         $resolver->setDefined('state')
@@ -76,52 +89,51 @@ abstract class AbstractApi
             ->setAllowedTypes('country', 'string');
         $resolver->setDefined('number')
             ->setAllowedTypes('number', 'string');
+        $resolver->setDefined('phonenumber')
+            ->setAllowedTypes('phonenumber', 'string');
+
+        $resolver->setDefined('email')
+            ->setAllowedTypes('email', 'string')
+            ->setAllowedValues('email', fn($value): bool => filter_var($value, FILTER_VALIDATE_EMAIL));
+        $resolver->setDefined('password2')
+            ->setAllowedTypes('password2', 'string');
+
+        $resolver->setDefined('customfields')
+            ->setAllowedTypes('customfields', 'string');
+
+        $resolver->setDefined('ip')
+            ->setAllowedTypes('ip', 'string')
+            ->setInfo('ip', 'Must be a valid ipv4/6')
+            ->setAllowedValues('ip', fn($value): bool => filter_var($value, FILTER_VALIDATE_IP, FILTER_FLAG_IPV4 | FILTER_FLAG_IPV6));
+        $resolver->setDefined('clientip')
+            ->setAllowedTypes('clientip', 'string')
+            ->setInfo('clientip', 'Must be a valid ipv4/6')
+            ->setAllowedValues('clientip', fn($value): bool => filter_var($value, FILTER_VALIDATE_IP, FILTER_FLAG_IPV4 | FILTER_FLAG_IPV6));
+
         $resolver->setDefined('search')
             ->setAllowedTypes('search', 'string');
-        $resolver->setDefined('messagename')
-            ->setAllowedTypes('messagename', 'string');            
-        $resolver->setDefined('customvars')
-            ->setAllowedTypes('customvars', 'string');            
-        $resolver->setDefined('customsubject')
-            ->setAllowedTypes('customsubject', 'string');            
-        $resolver->setDefined('custommessage')
-            ->setAllowedTypes('custommessage', 'string');            
-        $resolver->setDefined('customtype')
-            ->setAllowedTypes('customtype', 'string');            
-        $resolver->setDefined('id')
-            ->setAllowedTypes('id', 'int');
 
         $resolver->setDefined('limitstart')
             ->setAllowedTypes('limitstart', 'int')
-            ->setAllowedValues('limitstart', function ($value): bool {
-                return $value > 0;
-            });
+            ->setAllowedValues('limitstart', fn($value): bool => $value > 0);
         $resolver->setDefined('limitnum')
             ->setAllowedTypes('limitnum', 'int')
-            ->setAllowedValues('limitnum', function ($value): bool {
-                return $value > 0 && $value <= 250;
-            });
+            ->setAllowedValues('limitnum', fn($value): bool => $value > 0 && $value <= 250);
+
         $resolver->setDefined('sorting')
             ->setAllowedValues('sorting', self::SORTING);
         $resolver->setDefined('sortOrder')
             ->setAllowedValues('sortOrder', self::SORTING);
         $resolver->setDefined('orderby')
-            ->setAllowedValues('orderby', ['id', 'invoicenumber', 'date', 'duedate', 'total', 'status']);
+            ->setAllowedTypes('orderby', 'string');
+
         $resolver->setDefined('status')
             ->setAllowedValues('status', [
-                // Client
-                'Active', 'Inactive', 'Closed',
-
-                // Invoice
-                'Draft', 'Unpaid', 'Paid', 'Cancelled',
-                'Refunded', 'Collections', 'Payment Pending',
-
-                // Product - DomainStatus
-                'Suspended', 'Terminated', 'Completed', 'Pending',
-                'Pending Registration', 'Pending Transfer', 'Grace',
-                'Redemption', 'Expired', 'Cancelled', 'Fraud', 'Transferred Away'
+                ...self::STATUS_ORDER,
+                ...self::STATUS_CLIENT,
+                ...self::STATUS_INVOICE,
+                ...self::STATUS_PRODUCT,
             ]);
-
 
         return $resolver;
     }

@@ -8,17 +8,18 @@ class Users extends AbstractApi
 {
     public function addUsers(array $parameters = [])
     {
-        return $this->send(
-            'addUsers',
-            $this->createOptionsResolver()->resolve($parameters)
-        );
+        $resolver = $this->createOptionsResolver();
+        $resolver->setDefined(['language']);
+        $resolver->setAllowedTypes('language', 'string');
+        $resolver->setRequired(['firstname', 'lastname', 'email', 'password2']);
+
+        return $this->send('addUsers', $resolver->resolve($parameters));
     }
 
     public function getUsers(array $parameters = [])
     {
-        return $this->send(
-            'GetUsers',
-            $this->createOptionsResolver()->resolve($parameters)
-        );
+        $resolver = $this->createOptionsResolver();
+
+        return $this->send('GetUsers', $resolver->resolve($parameters));
     }
 }
