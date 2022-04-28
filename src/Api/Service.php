@@ -6,11 +6,17 @@ namespace DarthSoup\WhmcsApi\Api;
 
 class Service extends AbstractApi
 {
+    /**
+     * @see https://developers.whmcs.com/api-reference/modulechangepackage/
+     */
     public function moduleChangePackage(int $serviceId)
     {
         return $this->send('ModuleChangePackage', ['serviceid' => $serviceId]);
     }
 
+    /**
+     * @see https://developers.whmcs.com/api-reference/modulechangepw/
+     */
     public function moduleChangePw(int $serviceId, string $servicePassword)
     {
         return $this->send('ModuleChangePw', [
@@ -19,11 +25,17 @@ class Service extends AbstractApi
         ]);
     }
 
+    /**
+     * @see https://developers.whmcs.com/api-reference/modulecreate/
+     */
     public function moduleCreate(int $serviceId)
     {
         return $this->send('ModuleCreate', ['serviceid' => $serviceId]);
     }
 
+    /**
+     * @see https://developers.whmcs.com/api-reference/modulecustom/
+     */
     public function moduleCustom(int $serviceId, string $funcName)
     {
         return $this->send('ModuleCustom', [
@@ -32,6 +44,9 @@ class Service extends AbstractApi
         ]);
     }
 
+    /**
+     * @see https://developers.whmcs.com/api-reference/modulesuspend/
+     */
     public function moduleSuspend(int $serviceId, string $suspendReason)
     {
         return $this->send('ModuleSuspend', [
@@ -40,16 +55,25 @@ class Service extends AbstractApi
         ]);
     }
 
+    /**
+     * @see https://developers.whmcs.com/api-reference/moduleterminate/
+     */
     public function moduleTerminate(int $serviceId)
     {
         return $this->send('ModuleTerminate', ['serviceid' => $serviceId]);
     }
 
+    /**
+     * @see https://developers.whmcs.com/api-reference/moduleunsuspend/
+     */
     public function moduleUnsuspend(int $serviceId)
     {
         return $this->send('ModuleUnsuspend', ['serviceid' => $serviceId]);
     }
 
+    /**
+     * @see https://developers.whmcs.com/api-reference/updateclientproduct/
+     */
     public function updateClientProduct(array $parameters = [])
     {
         $resolver = $this->createOptionsResolver();
@@ -66,6 +90,9 @@ class Service extends AbstractApi
         return $this->send('UpdateClientProduct', $resolver->resolve($parameters));
     }
 
+    /**
+     * @see https://developers.whmcs.com/api-reference/upgradeproduct/
+     */
     public function upgradeProduct(array $parameters = [])
     {
         $resolver = $this->createOptionsResolver();

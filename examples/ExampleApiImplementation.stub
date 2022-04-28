@@ -6,6 +6,9 @@ namespace DarthSoup\WhmcsApi\Api;
 
 class ExampleApiImplementation extends AbstractApi
 {
+    /**
+     * @see https://developers.whmcs.com/api-reference/<endpoint>/
+     */
     public function exampleEndpoint(array $parameters = [])
     {
         $resolver = $this->createOptionsResolver();

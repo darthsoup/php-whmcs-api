@@ -6,6 +6,9 @@ namespace DarthSoup\WhmcsApi\Api;
 
 class Client extends AbstractApi
 {
+    /**
+     * @see https://developers.whmcs.com/api-reference/addclient/
+     */
     public function addClient(array $parameters = [])
     {
         $resolver = $this->createOptionsResolver();
@@ -20,6 +23,9 @@ class Client extends AbstractApi
         return $this->send('AddClient', $resolver->resolve($parameters));
     }
 
+    /**
+     * @see https://developers.whmcs.com/api-reference/addcontact/
+     */
     public function addContact(array $parameters = [])
     {
         $resolver = $this->createOptionsResolver();
@@ -32,11 +38,17 @@ class Client extends AbstractApi
         return $this->send('AddContact', $resolver->resolve($parameters));
     }
 
+    /**
+     * @see https://developers.whmcs.com/api-reference/closeclient/
+     */
     public function closeClient(int $clientId)
     {
         return $this->send('CloseClient', ['clientid' => $clientId]);
     }
 
+    /**
+     * @see https://developers.whmcs.com/api-reference/deleteclient/
+     */
     public function deleteClient(int $clientId, bool $deleteUsers = false, bool $deleteTransactions = false)
     {
         return $this->send('DeleteClient', [
@@ -46,26 +58,41 @@ class Client extends AbstractApi
         ]);
     }
 
+    /**
+     * @see https://developers.whmcs.com/api-reference/deletecontact/
+     */
     public function deleteContact(int $contactId)
     {
         return $this->send('DeleteContact', ['contactid' => $contactId]);
     }
 
+    /**
+     * @see https://developers.whmcs.com/api-reference/getcancelledpackages/
+     */
     public function getCancelledPackages(array $parameters = [])
     {
         return $this->send('GetCancelledPackages', $this->createOptionsResolver()->resolve($parameters));
     }
 
+    /**
+     * @see https://developers.whmcs.com/api-reference/getclientgroups/
+     */
     public function getClientGroups()
     {
         return $this->send('GetClientGroups');
     }
 
+    /**
+     * @see https://developers.whmcs.com/api-reference/getclientpassword/
+     */
     public function getClientPassword(array $parameters = [])
     {
         return $this->send('GetClientPassword', $this->createOptionsResolver()->resolve($parameters));
     }
 
+    /**
+     * @see https://developers.whmcs.com/api-reference/getclients/
+     */
     public function getClients(array $parameters = [])
     {
         $resolver = $this->createOptionsResolver();
@@ -74,6 +101,9 @@ class Client extends AbstractApi
         return $this->send('GetClients', $resolver->resolve($parameters));
     }
 
+    /**
+     * @see https://developers.whmcs.com/api-reference/getclientsaddons/
+     */
     public function getClientsAddons(array $parameters = [])
     {
         $resolver = $this->createOptionsResolver();
@@ -85,6 +115,9 @@ class Client extends AbstractApi
         return $this->send('GetClientsAddons', $resolver->resolve($parameters));
     }
 
+    /**
+     * @see https://developers.whmcs.com/api-reference/getclientsdetails/
+     */
     public function getClientsDetails(array $parameters = [])
     {
         $resolver = $this->createOptionsResolver();
@@ -96,6 +129,9 @@ class Client extends AbstractApi
         return $this->send('GetClientsDetails', $resolver->resolve($parameters));
     }
 
+    /**
+     * @see https://developers.whmcs.com/api-reference/getclientsdomains/
+     */
     public function getClientsDomains(array $parameters = [])
     {
         $resolver = $this->createOptionsResolver();
@@ -107,6 +143,9 @@ class Client extends AbstractApi
         return $this->send('GetClientsDomains', $resolver->resolve($parameters));
     }
 
+    /**
+     * @see https://developers.whmcs.com/api-reference/getclientsproducts/
+     */
     public function getClientsProducts(array $parameters = [])
     {
         $resolver = $this->createOptionsResolver();
@@ -120,6 +159,9 @@ class Client extends AbstractApi
         return $this->send('GetClientsProducts', $resolver->resolve($parameters));
     }
 
+    /**
+     * @see https://developers.whmcs.com/api-reference/getcontacts/
+     */
     public function getContacts(array $parameters = [])
     {
         $resolver = $this->createOptionsResolver();
@@ -129,6 +171,9 @@ class Client extends AbstractApi
         return $this->send('GetContacts', $resolver->resolve($parameters));
     }
 
+    /**
+     * @see https://developers.whmcs.com/api-reference/getemails/
+     */
     public function getEmails(array $parameters = [])
     {
         $resolver = $this->createOptionsResolver();
@@ -140,6 +185,9 @@ class Client extends AbstractApi
         return $this->send('GetEmails', $resolver->resolve($parameters));
     }
 
+    /**
+     * @see https://developers.whmcs.com/api-reference/updateclient/
+     */
     public function updateClient(array $parameters = [])
     {
         $resolver = $this->createOptionsResolver();
@@ -157,6 +205,9 @@ class Client extends AbstractApi
         return $this->send('UpdateClient', $resolver->resolve($parameters));
     }
 
+    /**
+     * @see https://developers.whmcs.com/api-reference/updatecontact/
+     */
     public function updateContact(array $parameters = [])
     {
         $resolver = $this->createOptionsResolver();

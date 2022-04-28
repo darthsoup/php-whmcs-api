@@ -6,11 +6,17 @@ namespace DarthSoup\WhmcsApi\Api;
 
 class Servers extends AbstractApi
 {
+    /**
+     * @see https://developers.whmcs.com/api-reference/gethealthstatus/
+     */
     public function getHealthStatus(bool $fetchStatus = false)
     {
         return $this->send('GetHealthStatus', ['fetchStatus' => $fetchStatus]);
     }
 
+    /**
+     * @see https://developers.whmcs.com/api-reference/getservers/
+     */
     public function getServers(array $parameters = [])
     {
         $resolver = $this->createOptionsResolver();

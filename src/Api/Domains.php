@@ -6,6 +6,9 @@ namespace DarthSoup\WhmcsApi\Api;
 
 class Domains extends AbstractApi
 {
+    /**
+     * @see https://developers.whmcs.com/api-reference/createorupdatetld/
+     */
     public function createOrUpdateTLD(array $parameters = [])
     {
         $resolver = $this->createOptionsResolver();
@@ -20,21 +23,33 @@ class Domains extends AbstractApi
         return $this->send('CreateOrUpdateTLD', $resolver->resolve($parameters));
     }
 
+    /**
+     * @see https://developers.whmcs.com/api-reference/domaingetlockingstatus/
+     */
     public function domainGetLockingStatus(int $domainId)
     {
         return $this->send('DomainGetLockingStatus', ['domainid' => $domainId]);
     }
 
+    /**
+     * @see https://developers.whmcs.com/api-reference/domaingetnameservers/
+     */
     public function domainGetNameservers(int $domainId)
     {
         return $this->send('DomainGetNameservers', ['domainid' => $domainId]);
     }
 
+    /**
+     * @see https://developers.whmcs.com/api-reference/domaingetwhoisinfo/
+     */
     public function domainGetWhoisInfo(int $domainId)
     {
         return $this->send('DomainGetWhoisInfo', ['domainid' => $domainId]);
     }
 
+    /**
+     * @see https://developers.whmcs.com/api-reference/domainregister/
+     */
     public function domainRegister(array $parameters = [])
     {
         $resolver = $this->createOptionsResolver();
@@ -45,6 +60,9 @@ class Domains extends AbstractApi
         return $this->send('DomainRegister', $resolver->resolve($parameters));
     }
 
+    /**
+     * @see https://developers.whmcs.com/api-reference/domainrelease/
+     */
     public function domainRelease(array $parameters = [])
     {
         $resolver = $this->createOptionsResolver();
@@ -55,6 +73,9 @@ class Domains extends AbstractApi
         return $this->send('DomainRelease', $resolver->resolve($parameters));
     }
 
+    /**
+     * @see https://developers.whmcs.com/api-reference/domainrenew/
+     */
     public function domainRenew(array $parameters = [])
     {
         $resolver = $this->createOptionsResolver();
@@ -65,11 +86,17 @@ class Domains extends AbstractApi
         return $this->send('DomainRenew', $resolver->resolve($parameters));
     }
 
+    /**
+     * @see https://developers.whmcs.com/api-reference/domainrequestepp/
+     */
     public function domainRequestEpp(int $domainId)
     {
         return $this->send('DomainRequestEPP', ['domainid' => $domainId]);
     }
 
+    /**
+     * @see https://developers.whmcs.com/api-reference/domaintransfer/
+     */
     public function domainTransfer(array $parameters = [])
     {
         $resolver = $this->createOptionsResolver();
@@ -80,6 +107,9 @@ class Domains extends AbstractApi
         return $this->send('DomainTransfer', $resolver->resolve($parameters));
     }
 
+    /**
+     * @see https://developers.whmcs.com/api-reference/domaintoggleidprotect/
+     */
     public function domainToggleIdProtect(array $parameters = [])
     {
         $resolver = $this->createOptionsResolver();
@@ -91,6 +121,9 @@ class Domains extends AbstractApi
         return $this->send('DomainToggleIdProtect', $resolver->resolve($parameters));
     }
 
+    /**
+     * @see https://developers.whmcs.com/api-reference/domainupdatelockingstatus/
+     */
     public function domainUpdateLockingStatus(array $parameters = [])
     {
         $resolver = $this->createOptionsResolver();
@@ -102,6 +135,9 @@ class Domains extends AbstractApi
         return $this->send('DomainUpdateLockingStatus', $resolver->resolve($parameters));
     }
 
+    /**
+     * @see https://developers.whmcs.com/api-reference/domainupdatenameservers/
+     */
     public function domainUpdateNameservers(array $parameters = [])
     {
         $resolver = $this->createOptionsResolver();
@@ -114,6 +150,9 @@ class Domains extends AbstractApi
         return $this->send('DomainUpdateNameservers', $resolver->resolve($parameters));
     }
 
+    /**
+     * @see https://developers.whmcs.com/api-reference/domainupdatewhoisinfo/
+     */
     public function domainUpdateWhoisInfo(array $parameters = [])
     {
         $resolver = $this->createOptionsResolver();
@@ -125,16 +164,25 @@ class Domains extends AbstractApi
         return $this->send('DomainUpdateWhoisInfo', $resolver->resolve($parameters));
     }
 
+    /**
+     * @see https://developers.whmcs.com/api-reference/domainwhois/
+     */
     public function domainWhois(string $domain)
     {
         return $this->send('DomainRenew', ['domain' => $domain]);
     }
 
+    /**
+     * @see https://developers.whmcs.com/api-reference/getregistrars/
+     */
     public function getRegistrars()
     {
         return $this->send('GetRegistrars');
     }
 
+    /**
+     * @see https://developers.whmcs.com/api-reference/gettldpricing/
+     */
     public function getTldPricing(array $parameters = [])
     {
         $resolver = $this->createOptionsResolver();
@@ -145,6 +193,9 @@ class Domains extends AbstractApi
         return $this->send('GetTLDPricing', $resolver->resolve($parameters));
     }
 
+    /**
+     * @see https://developers.whmcs.com/api-reference/updateclientdomain/
+     */
     public function updateClientDomain(array $parameters = [])
     {
         $resolver = $this->createOptionsResolver();

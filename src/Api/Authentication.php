@@ -6,6 +6,9 @@ namespace DarthSoup\WhmcsApi\Api;
 
 class Authentication extends AbstractApi
 {
+    /**
+     * @see https://developers.whmcs.com/api-reference/createoauthcredential/
+     */
     public function createOAuthCredential(array $parameters = [])
     {
         $resolver = $this->createOptionsResolver();
@@ -17,6 +20,9 @@ class Authentication extends AbstractApi
         return $this->send('CreateOAuthCredential', $resolver->resolve($parameters));
     }
 
+    /**
+     * @see https://developers.whmcs.com/api-reference/createssotoken/
+     */
     public function createSsoToken(array $parameters = [])
     {
         $resolver = $this->createOptionsResolver();
@@ -31,11 +37,17 @@ class Authentication extends AbstractApi
         return $this->send('CreateSsoToken', $resolver->resolve($parameters));
     }
 
+    /**
+     * @see https://developers.whmcs.com/api-reference/deleteoauthcredential/
+     */
     public function deleteOAuthCredential(int $credentialId)
     {
         return $this->send('DeleteOAuthCredential', ['credentialId' => $credentialId]);
     }
 
+    /**
+     * @see https://developers.whmcs.com/api-reference/listoauthcredentials/
+     */
     public function listOAuthCredentials(array $parameters = [])
     {
         $resolver = $this->createOptionsResolver();
@@ -47,6 +59,9 @@ class Authentication extends AbstractApi
         return $this->send('ListOAuthCredentials', $resolver->resolve($parameters));
     }
 
+    /**
+     * @see https://developers.whmcs.com/api-reference/validatelogin/
+     */
     public function validateLogin(string $username, string $password)
     {
         return $this->send('ValidateLogin', ['username' => $username, 'password2' => $password]);

@@ -6,6 +6,9 @@ namespace DarthSoup\WhmcsApi\Api;
 
 class Users extends AbstractApi
 {
+    /**
+     * @see https://developers.whmcs.com/api-reference/adduser/
+     */
     public function addUser(array $parameters = [])
     {
         $resolver = $this->createOptionsResolver();
@@ -16,6 +19,9 @@ class Users extends AbstractApi
         return $this->send('AddUser', $resolver->resolve($parameters));
     }
 
+    /**
+     * @see https://developers.whmcs.com/api-reference/getusers/
+     */
     public function getUsers(array $parameters = [])
     {
         $resolver = $this->createOptionsResolver();

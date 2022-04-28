@@ -6,11 +6,17 @@ namespace DarthSoup\WhmcsApi\Api;
 
 class Affiliates extends AbstractApi
 {
+    /**
+     * @see https://developers.whmcs.com/api-reference/affiliateactivate/
+     */
     public function affiliateActivate(int $userId)
     {
         return $this->send('AffiliateActivate', ['userid' => $userId]);
     }
 
+    /**
+     * @see https://developers.whmcs.com/api-reference/getaffiliates/
+     */
     public function getAffiliates(array $parameters = [])
     {
         $resolver = $this->createOptionsResolver();

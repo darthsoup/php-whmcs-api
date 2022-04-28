@@ -6,6 +6,9 @@ namespace DarthSoup\WhmcsApi\Api;
 
 class Addons extends AbstractApi
 {
+    /**
+     * @see https://developers.whmcs.com/api-reference/updateclientaddon/
+     */
     public function updateClientAddon(array $parameters = [])
     {
         $resolver = $this->createOptionsResolver();

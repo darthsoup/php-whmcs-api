@@ -6,11 +6,17 @@ namespace DarthSoup\WhmcsApi\Api;
 
 class Billing extends AbstractApi
 {
+    /**
+     * @see https://developers.whmcs.com/api-reference/acceptquote/
+     */
     public function acceptQuote(int $quoteId)
     {
         return $this->send('AcceptQuote', ['quoteid' => $quoteId]);
     }
 
+    /**
+     * @see https://developers.whmcs.com/api-reference/addbillableitem/
+     */
     public function addBillableItem(array $parameters = [])
     {
         $resolver = $this->createOptionsResolver();
@@ -29,6 +35,9 @@ class Billing extends AbstractApi
         return $this->send('AddBillableItem', $resolver->resolve($parameters));
     }
 
+    /**
+     * @see https://developers.whmcs.com/api-reference/addcredit/
+     */
     public function addCredit(array $parameters = [])
     {
         $resolver = $this->createOptionsResolver();
@@ -41,6 +50,9 @@ class Billing extends AbstractApi
         return $this->send('AddCredit', $resolver->resolve($parameters));
     }
 
+    /**
+     * @see https://developers.whmcs.com/api-reference/addinvoicepayment/
+     */
     public function addInvoicePayment(array $parameters = [])
     {
         $resolver = $this->createOptionsResolver();
@@ -53,6 +65,9 @@ class Billing extends AbstractApi
         return $this->send('AddInvoicePayment', $resolver->resolve($parameters));
     }
 
+    /**
+     * @see https://developers.whmcs.com/api-reference/addpaymethod/
+     */
     public function addPayMethod(array $parameters = [])
     {
         $resolver = $this->createOptionsResolver();
@@ -66,6 +81,9 @@ class Billing extends AbstractApi
         return $this->send('AddPayMethod', $resolver->resolve($parameters));
     }
 
+    /**
+     * @see https://developers.whmcs.com/api-reference/addtransaction/
+     */
     public function addTransaction(array $parameters = [])
     {
         $resolver = $this->createOptionsResolver();
@@ -82,6 +100,9 @@ class Billing extends AbstractApi
         return $this->send('AddTransaction', $resolver->resolve($parameters));
     }
 
+    /**
+     * @see https://developers.whmcs.com/api-reference/applycredit/
+     */
     public function applyCredit(array $parameters = [])
     {
         $resolver = $this->createOptionsResolver();
@@ -94,6 +115,9 @@ class Billing extends AbstractApi
         return $this->send('ApplyCredit', $resolver->resolve($parameters));
     }
 
+    /**
+     * @see https://developers.whmcs.com/api-reference/capturepayment/
+     */
     public function capturePayment(array $parameters = [])
     {
         $resolver = $this->createOptionsResolver();
@@ -105,6 +129,9 @@ class Billing extends AbstractApi
         return $this->send('CapturePayment', $resolver->resolve($parameters));
     }
 
+    /**
+     * @see https://developers.whmcs.com/api-reference/createinvoice/
+     */
     public function createInvoice(array $parameters = [])
     {
         $resolver = $this->createOptionsResolver();
@@ -131,6 +158,9 @@ class Billing extends AbstractApi
         return $this->send('CreateInvoice', $this->createOptionsResolver()->resolve($parameters));
     }
 
+    /**
+     * @see https://developers.whmcs.com/api-reference/createquote/
+     */
     public function createQuote(array $parameters = [])
     {
         $resolver = $this->createOptionsResolver();
@@ -145,6 +175,9 @@ class Billing extends AbstractApi
         return $this->send('CreateQuote', $resolver->resolve($parameters));
     }
 
+    /**
+     * @see https://developers.whmcs.com/api-reference/deletepaymethod/
+     */
     public function deletePayMethod(array $parameters = [])
     {
         $resolver = $this->createOptionsResolver();
@@ -156,11 +189,17 @@ class Billing extends AbstractApi
         return $this->send('DeletePayMethod', $resolver->resolve($parameters));
     }
 
+    /**
+     * @see https://developers.whmcs.com/api-reference/deletequote/
+     */
     public function deleteQuote(int $quoteId)
     {
         return $this->send('DeleteQuote', ['quoteid' => $quoteId]);
     }
 
+    /**
+     * @see https://developers.whmcs.com/api-reference/geninvoices/
+     */
     public function genInvoices(array $parameters = [])
     {
         $resolver = $this->createOptionsResolver();
@@ -174,16 +213,25 @@ class Billing extends AbstractApi
         return $this->send('GenInvoices', $resolver->resolve($parameters));
     }
 
+    /**
+     * @see https://developers.whmcs.com/api-reference/getcredits/
+     */
     public function getCredits(int $clientId)
     {
         return $this->send('GetCredits', ['clientid' => $clientId]);
     }
 
+    /**
+     * @see https://developers.whmcs.com/api-reference/getinvoice/
+     */
     public function getInvoice(int $invoiceId)
     {
         return $this->send('GetInvoice', ['invoiceid' => $invoiceId]);
     }
 
+    /**
+     * @see https://developers.whmcs.com/api-reference/getinvoices/
+     */
     public function getInvoices(array $parameters = [])
     {
         $resolver = $this->createOptionsResolver();
@@ -194,6 +242,9 @@ class Billing extends AbstractApi
         return $this->send('GetInvoices', $resolver->resolve($parameters));
     }
 
+    /**
+     * @see https://developers.whmcs.com/api-reference/getpaymethods/
+     */
     public function getPayMethods(array $parameters = [])
     {
         $resolver = $this->createOptionsResolver();
@@ -205,6 +256,9 @@ class Billing extends AbstractApi
         return $this->send('GetPayMethods', $resolver->resolve($parameters));
     }
 
+    /**
+     * @see https://developers.whmcs.com/api-reference/getquotes/
+     */
     public function getQuotes(array $parameters = [])
     {
         $resolver = $this->createOptionsResolver();
@@ -220,6 +274,9 @@ class Billing extends AbstractApi
         return $this->send('GetQuotes', $resolver->resolve($parameters));
     }
 
+    /**
+     * @see https://developers.whmcs.com/api-reference/gettransactions/
+     */
     public function getTransactions(array $parameters = [])
     {
         $resolver = $this->createOptionsResolver();
@@ -231,11 +288,17 @@ class Billing extends AbstractApi
         return $this->send('GetTransactions', $resolver->resolve($parameters));
     }
 
+    /**
+     * @see https://developers.whmcs.com/api-reference/sendquote/
+     */
     public function sendQuote(int $quoteId)
     {
         return $this->send('SendQuote', ['quoteid' => $quoteId]);
     }
 
+    /**
+     * @see https://developers.whmcs.com/api-reference/updateinvoice/
+     */
     public function updateInvoice(array $parameters = [])
     {
         $resolver = $this->createOptionsResolver();
@@ -258,6 +321,9 @@ class Billing extends AbstractApi
         return $this->send('UpdateInvoice', $this->createOptionsResolver()->resolve($parameters));
     }
 
+    /**
+     * @see https://developers.whmcs.com/api-reference/updatepaymethod/
+     */
     public function updatePayMethod(array $parameters = [])
     {
         $resolver = $this->createOptionsResolver();
@@ -272,6 +338,9 @@ class Billing extends AbstractApi
         return $this->send('UpdatePayMethod', $resolver->resolve($parameters));
     }
 
+    /**
+     * @see https://developers.whmcs.com/api-reference/updatequote/
+     */
     public function updateQuote(array $parameters = [])
     {
         $resolver = $this->createOptionsResolver();
@@ -287,6 +356,9 @@ class Billing extends AbstractApi
         return $this->send('UpdateQuote', $resolver->resolve($parameters));
     }
 
+    /**
+     * @see https://developers.whmcs.com/api-reference/updatetransaction/
+     */
     public function updateTransaction(array $parameters = [])
     {
         $resolver = $this->createOptionsResolver();

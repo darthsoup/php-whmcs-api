@@ -6,6 +6,9 @@ namespace DarthSoup\WhmcsApi\Api;
 
 class Orders extends AbstractApi
 {
+    /**
+     * @see https://developers.whmcs.com/api-reference/acceptorder/
+     */
     public function acceptOrder(array $parameters = [])
     {
         $resolver = $this->createOptionsResolver();
@@ -27,6 +30,9 @@ class Orders extends AbstractApi
         return $this->send('AcceptOrder', $resolver->resolve($parameters));
     }
 
+    /**
+     * @see https://developers.whmcs.com/api-reference/addorder/
+     */
     public function addOrder(array $parameters = [])
     {
         $resolver = $this->createOptionsResolver();
@@ -82,6 +88,9 @@ class Orders extends AbstractApi
         return $this->send('AddOrder', $resolver->resolve($parameters));
     }
 
+    /**
+     * @see https://developers.whmcs.com/api-reference/cancelorder/
+     */
     public function cancelOrder(array $parameters = [])
     {
         $resolver = $this->createOptionsResolver();
@@ -94,16 +103,25 @@ class Orders extends AbstractApi
         return $this->send('CancelOrder', $resolver->resolve($parameters));
     }
 
+    /**
+     * @see https://developers.whmcs.com/api-reference/deleteorder/
+     */
     public function deleteOrder(int $orderId)
     {
         return $this->send('DeleteOrder', ['orderid' => $orderId]);
     }
 
+    /**
+     * @see https://developers.whmcs.com/api-reference/fraudorder/
+     */
     public function fraudOrder(int $orderId, bool $cancelSub = false)
     {
         return $this->send('FraudOrder', ['orderid' => $orderId, 'cancelsub' => $cancelSub]);
     }
 
+    /**
+     * @see https://developers.whmcs.com/api-reference/getorders/
+     */
     public function getOrders(array $parameters = [])
     {
         $resolver = $this->createOptionsResolver();
@@ -114,11 +132,17 @@ class Orders extends AbstractApi
         return $this->send('GetOrders', $resolver->resolve($parameters));
     }
 
+    /**
+     * @see https://developers.whmcs.com/api-reference/getorderstatuses/
+     */
     public function getOrderStatuses()
     {
         return $this->send('GetOrderStatuses');
     }
 
+    /**
+     * @see https://developers.whmcs.com/api-reference/getproducts/
+     */
     public function getProducts(array $parameters = [])
     {
         $resolver = $this->createOptionsResolver();
@@ -130,6 +154,9 @@ class Orders extends AbstractApi
         return $this->send('GetProducts', $resolver->resolve($parameters));
     }
 
+    /**
+     * @see https://developers.whmcs.com/api-reference/getpromotions/
+     */
     public function getPromotions(array $parameters = [])
     {
         $resolver = $this->createOptionsResolver();
@@ -139,6 +166,9 @@ class Orders extends AbstractApi
         return $this->send('getPromotions', $resolver->resolve($parameters));
     }
 
+    /**
+     * @see https://developers.whmcs.com/api-reference/orderfraudcheck/
+     */
     public function orderFraudCheck(array $parameters = [])
     {
         $resolver = $this->createOptionsResolver();
@@ -150,6 +180,9 @@ class Orders extends AbstractApi
         return $this->send('OrderFraudCheck', $resolver->resolve($parameters));
     }
 
+    /**
+     * @see https://developers.whmcs.com/api-reference/pendingorder/
+     */
     public function pendingOrder(int $orderId)
     {
         return $this->send('PendingOrder', ['orderid' => $orderId]);

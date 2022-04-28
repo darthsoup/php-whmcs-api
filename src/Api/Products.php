@@ -6,6 +6,9 @@ namespace DarthSoup\WhmcsApi\Api;
 
 class Products extends AbstractApi
 {
+    /**
+     * @see https://developers.whmcs.com/api-reference/addproduct/
+     */
     public function addProduct(array $parameters = [])
     {
         $resolver = $this->createOptionsResolver();
