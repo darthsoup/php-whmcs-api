@@ -88,6 +88,9 @@ abstract class AbstractApi
             ->setAllowedTypes('number', 'string');
         $resolver->setDefined('phonenumber')
             ->setAllowedTypes('phonenumber', 'string');
+        
+        $resolver->setDefined('gid')
+            ->setAllowedTypes('gid', 'integer');
 
         $resolver->setDefined('email')
             ->setAllowedTypes('email', 'string')
