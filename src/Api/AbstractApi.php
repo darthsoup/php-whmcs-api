@@ -91,7 +91,7 @@ abstract class AbstractApi
 
         $resolver->setDefined('email')
             ->setAllowedTypes('email', 'string')
-            ->setAllowedValues('email', fn($value): bool => filter_var($value, FILTER_VALIDATE_EMAIL));
+            ->setAllowedValues('email', fn($value) => filter_var($value, FILTER_VALIDATE_EMAIL));
         $resolver->setDefined('password2')
             ->setAllowedTypes('password2', 'string');
 
@@ -100,12 +100,12 @@ abstract class AbstractApi
 
         $resolver->setDefined('ip')
             ->setAllowedTypes('ip', 'string')
-            ->setInfo('ip', 'Must be a valid ipv4/6')
-            ->setAllowedValues('ip', fn($value): bool => filter_var($value, FILTER_VALIDATE_IP, FILTER_FLAG_IPV4 | FILTER_FLAG_IPV6));
+            ->setInfo('ip', 'Must be a valid IPv4 or IPv6.')
+            ->setAllowedValues('ip', fn($value) => filter_var($value, FILTER_VALIDATE_IP, FILTER_FLAG_IPV4 | FILTER_FLAG_IPV6));
         $resolver->setDefined('clientip')
             ->setAllowedTypes('clientip', 'string')
-            ->setInfo('clientip', 'Must be a valid ipv4/6')
-            ->setAllowedValues('clientip', fn($value): bool => filter_var($value, FILTER_VALIDATE_IP, FILTER_FLAG_IPV4 | FILTER_FLAG_IPV6));
+            ->setInfo('clientip', 'Must be a valid IPv4 or IPv6.')
+            ->setAllowedValues('clientip', fn($value) => filter_var($value, FILTER_VALIDATE_IP, FILTER_FLAG_IPV4 | FILTER_FLAG_IPV6));
 
 
         // Global
@@ -113,10 +113,10 @@ abstract class AbstractApi
             ->setAllowedTypes('search', 'string');
         $resolver->setDefined('limitstart')
             ->setAllowedTypes('limitstart', 'int')
-            ->setAllowedValues('limitstart', fn($value): bool => $value > 0);
+            ->setAllowedValues('limitstart', fn($value) => $value > 0);
         $resolver->setDefined('limitnum')
             ->setAllowedTypes('limitnum', 'int')
-            ->setAllowedValues('limitnum', fn($value): bool => $value > 0 && $value <= 250);
+            ->setAllowedValues('limitnum', fn($value) => $value > 0 && $value <= 250);
 
         $resolver->setDefined('sorting')
             ->setAllowedValues('sorting', self::SORTING);
