@@ -146,7 +146,7 @@ class Orders extends AbstractApi
     public function getProducts(array $parameters = [])
     {
         $resolver = $this->createOptionsResolver();
-        $resolver->setDefined(['pid', 'gpid', 'module']);
+        $resolver->setDefined(['pid', 'gid', 'module']);
         $resolver->setAllowedTypes('pid', 'int');
         $resolver->setAllowedTypes('gid', 'int');
         $resolver->setAllowedTypes('module', 'string');
