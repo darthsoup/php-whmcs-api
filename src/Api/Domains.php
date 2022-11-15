@@ -169,7 +169,7 @@ class Domains extends AbstractApi
      */
     public function domainWhois(string $domain)
     {
-        return $this->send('DomainRenew', ['domain' => $domain]);
+        return $this->send('DomainWhois', ['domain' => $domain]);
     }
 
     /**
