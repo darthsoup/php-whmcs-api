@@ -37,7 +37,7 @@ class Orders extends AbstractApi
     {
         $resolver = $this->createOptionsResolver();
         $resolver->setDefined([
-            'clientid', 'paymentmethod', 'pid', 'billingcycle', 'domaintype', 'regperiod', 'idnlanguage', 'eppcode',
+            'clientid', 'paymentmethod', 'pid', 'domain', 'billingcycle', 'domaintype', 'regperiod', 'idnlanguage', 'eppcode',
             'nameserver1', 'nameserver2', 'nameserver3', 'nameserver4', 'nameserver5', 'customfields', 'configoptions',
             'priceoverride', 'promocode', 'promooverride', 'affid', 'noinvoice', 'noinvoiceemail', 'noemail', 'addons',
             'hostname', 'ns1prefix', 'ns2prefix', 'rootpw', 'contactid', 'dnsmanagement', 'domainfields',
@@ -47,6 +47,7 @@ class Orders extends AbstractApi
         $resolver->setAllowedTypes('clientid', 'int');
         $resolver->setAllowedTypes('paymentmethod', 'string');
         $resolver->setAllowedTypes('pid', 'int[]');
+        $resolver->setAllowedTypes('domain', 'string[]');
         $resolver->setAllowedTypes('billingcycle', 'string[]');
         $resolver->setAllowedTypes('domaintype', 'string[]');
         $resolver->setAllowedTypes('regperiod', 'int[]');
@@ -83,7 +84,7 @@ class Orders extends AbstractApi
         $resolver->setAllowedTypes('serviceid', 'int');
         $resolver->setAllowedTypes('addonids', 'int[]');
         $resolver->setAllowedTypes('serviceids', 'int[]');
-        $resolver->setRequired(['clientId', 'paymentmethod']);
+        $resolver->setRequired(['clientid', 'paymentmethod']);
 
         return $this->send('AddOrder', $resolver->resolve($parameters));
     }
