@@ -42,7 +42,7 @@ class ExceptionHandler implements Plugin
 
             /*
              * WHMCS Errors to exception
-             * every direct response is httpstatus 200
+             * any success response is status code 200
              */
             $resultResponse = ResponseFormatter::errorResult($response);
             if ($status === 200 && $resultResponse === 'error') {
@@ -83,7 +83,7 @@ class ExceptionHandler implements Plugin
      * @param string|null $message
      * @return ErrorException
      */
-    private static function transformWhmcsMessageToException(int $status, ?string $message)
+    private static function transformWhmcsMessageToException(int $status, ?string $message): ErrorException
     {
         return new ErrorException($message, $status);
     }

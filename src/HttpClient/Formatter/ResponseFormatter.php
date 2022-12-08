@@ -28,7 +28,6 @@ final class ResponseFormatter
     /**
      * @param ResponseInterface $response
      * @return string|null
-     * @throws JsonException
      */
     public static function errorResult(ResponseInterface $response): ?string
     {
@@ -44,7 +43,6 @@ final class ResponseFormatter
     /**
      * @param ResponseInterface $response
      * @return string|null
-     * @throws JsonException
      */
     public static function errorMessage(ResponseInterface $response): ?string
     {

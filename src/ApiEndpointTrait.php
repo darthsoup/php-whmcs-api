@@ -18,7 +18,7 @@ use DarthSoup\WhmcsApi\Api\Service;
 use DarthSoup\WhmcsApi\Api\System;
 use DarthSoup\WhmcsApi\Api\Users;
 
-trait ApiClassTrait
+trait ApiEndpointTrait
 {
     public function addons(): Addons
     {
