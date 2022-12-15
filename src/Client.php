@@ -16,7 +16,7 @@ use Http\Client\Common\Plugin\HeaderDefaultsPlugin;
 
 class Client
 {
-    use ApiClassTrait;
+    use ApiEndpointTrait;
 
     public const AUTH_API_CREDENTIALS = 'API_TOKEN';
     public const AUTH_LOGIN_CREDENTIALS = 'USERNAME_TOKEN';

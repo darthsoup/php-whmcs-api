@@ -28,7 +28,21 @@ final class ResponseFormatter
     /**
      * @param ResponseInterface $response
      * @return string|null
-     * @throws JsonException
+     */
+    public static function errorResult(ResponseInterface $response): ?string
+    {
+        try {
+            $content = self::format($response);
+        } catch (JsonException $e) {
+            return null;
+        }
+
+        return $content['result'] ?? null;
+    }
+
+    /**
+     * @param ResponseInterface $response
+     * @return string|null
      */
     public static function errorMessage(ResponseInterface $response): ?string
     {

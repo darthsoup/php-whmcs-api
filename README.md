@@ -50,6 +50,25 @@ you can also add it by using `accessKey` in the init process.
 $client->accessKey('my_access_key');
 ```
 
+## Endpoints
+
+| Name           | Status     |
+|----------------|------------|
+| Addons         | Complete   |
+| Affiliates     | Complete   |
+| Authentication | Complete   |
+| Billing        | Complete   |
+| Client         | Complete   |
+| Domains        | Complete   |
+| Orders         | Complete   |
+| Products       | Complete   |
+| Servers        | Complete   |
+| Service        | Complete   |
+| Support        | Incomplete |
+| System         | Complete   |
+| Ticket         | Incomplete |
+| Users          | Complete   |
+
 ## Examples
 
 ### Get clients
@@ -73,10 +92,14 @@ $parameters = ['foo' => 'bar'];
 $client->custom()->yourCustomApiName($parameters);
 ```
 
+### Examples by files
+
+There are some examples in the `/examples` folder if reading documentation is not your cup of tea.
+
 ## Disclaimer
 
 If you are using this client, please refer to the documentation on the [WHMCS Developer](https://developers.whmcs.com/api/api-index/) page.
-The documentation of the API is very incomplete in some places and in some cases questionably documented.
+The API documentation is in some places very incomplete and in some cases questionably documented.
 
 ## Support
 

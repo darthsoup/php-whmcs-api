@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace DarthSoup\WhmcsApi\HttpClient\Plugin;
 
 use DarthSoup\WhmcsApi\Exception\AuthenticationException;
+use DarthSoup\WhmcsApi\Exception\ErrorException;
 use DarthSoup\WhmcsApi\Exception\IpBlockedException;
 use DarthSoup\WhmcsApi\HttpClient\Formatter\ResponseFormatter;
 use Http\Client\Common\Plugin;
@@ -28,13 +29,24 @@ class ExceptionHandler implements Plugin
      */
     public function handleRequest(RequestInterface $request, callable $next, callable $first): Promise
     {
-        $promise = $next($request);
-
-        return $promise->then(function (ResponseInterface $response): ResponseInterface {
+        return $next($request)->then(function (ResponseInterface $response): ResponseInterface {
             $status = $response->getStatusCode();
 
+            /* HTTP Exceptions */
             if ($status >= 400 && $status < 500) {
                 throw self::transformMessageToException(
+                    $status,
+                    ResponseFormatter::errorMessage($response) ?? $response->getReasonPhrase()
+                );
+            }
+
+            /*
+             * WHMCS Errors to exception
+             * any success response is status code 200
+             */
+            $resultResponse = ResponseFormatter::errorResult($response);
+            if ($status === 200 && $resultResponse === 'error') {
+                throw self::transformWhmcsMessageToException(
                     $status,
                     ResponseFormatter::errorMessage($response) ?? $response->getReasonPhrase()
                 );
@@ -64,5 +76,15 @@ class ExceptionHandler implements Plugin
         }
 
         return new RuntimeException($message, $status);
+    }
+
+    /**
+     * @param int $status
+     * @param string|null $message
+     * @return ErrorException
+     */
+    private static function transformWhmcsMessageToException(int $status, ?string $message): ErrorException
+    {
+        return new ErrorException($message, $status);
     }
 }
