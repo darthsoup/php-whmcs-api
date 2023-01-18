@@ -75,7 +75,7 @@ class Client
     public function url(string $url): void
     {
         $uri = $this->getHttpClientBuilder()->getUriFactory()->createUri($url);
-        $uri = $uri->withPath(self::API_PATH);
+        $uri = $uri->withPath(rtrim($uri->getPath(), '/') . self::API_PATH);
 
         $this->getHttpClientBuilder()->removePlugin(BaseUriPlugin::class);
         $this->getHttpClientBuilder()->addPlugin(
