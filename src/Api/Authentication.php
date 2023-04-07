@@ -62,8 +62,8 @@ class Authentication extends AbstractApi
     /**
      * @see https://developers.whmcs.com/api-reference/validatelogin/
      */
-    public function validateLogin(string $username, string $password)
+    public function validateLogin(string $email, string $password)
     {
-        return $this->send('ValidateLogin', ['username' => $username, 'password2' => $password]);
+        return $this->send('ValidateLogin', ['email' => $email, 'password2' => $password]);
     }
 }
