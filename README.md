@@ -10,7 +10,7 @@ Simple and PSR7 compatible WHMCS API Client which is inspired by [GitLabPHP/Clie
 ### Composer
 
 ```bash
-$ composer require "darthsoup/php-whmcs-api" "guzzlehttp/guzzle:^7.4" "http-interop/http-factory-guzzle:^1.2"
+$ composer require "darthsoup/php-whmcs-api" "guzzlehttp/guzzle:^7.5" "http-interop/http-factory-guzzle:^1.2"
 ```
 
 ### System Requirements
