@@ -96,7 +96,7 @@ abstract class AbstractApi
             ->setAllowedTypes('password2', 'string');
 
         $resolver->setDefined('customfields')
-            ->setAllowedTypes('customfields', 'string[]');
+            ->setAllowedTypes('customfields', 'string');
 
         $resolver->setDefined('ip')
             ->setAllowedTypes('ip', 'string')
