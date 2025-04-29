@@ -43,7 +43,6 @@ abstract class AbstractApi
     }
 
     /**
-     * @param string $action
      * @param array<string, mixed> $parameter
      * @return mixed|string
      */

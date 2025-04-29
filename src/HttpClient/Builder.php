@@ -46,7 +46,7 @@ class Builder
 
     public function getHttpClient(): HttpMethodsClientInterface
     {
-        if (null === $this->pluginClient) {
+        if (!$this->pluginClient instanceof \Http\Client\Common\HttpMethodsClientInterface) {
             $plugins = $this->plugins;
 
             $this->pluginClient = new HttpMethodsClient(

@@ -26,7 +26,7 @@ class ClientTest extends TestCase
         $this->assertInstanceOf(HttpMethodsClient::class, $client->getHttpClient());
     }
 
-    /** @dataProvider urlProvider */
+    #[\PHPUnit\Framework\Attributes\DataProvider('urlProvider')]
     public function testWhmcsUrl(string $url, string $expected): void
     {
         $container = [];

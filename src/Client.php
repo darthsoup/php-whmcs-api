@@ -24,9 +24,6 @@ class Client
     public const API_PATH = '/includes/api.php';
     public const USER_AGENT = 'php-whmcs-api';
 
-    /**
-     * @var Builder
-     */
     private Builder $httpClientBuilder;
 
     /**
@@ -44,12 +41,6 @@ class Client
         $builder->addPlugin(new WhmcsContentType());
     }
 
-    /**
-     * @param string $identifier
-     * @param string $secret
-     * @param string $authMethod
-     * @return void
-     */
     public function authenticate(string $identifier, string $secret, string $authMethod = self::AUTH_API_CREDENTIALS): void
     {
         $this->getHttpClientBuilder()->removePlugin(Authentication::class);
@@ -58,20 +49,12 @@ class Client
         );
     }
 
-    /**
-     * @param string $accessKey
-     * @return void
-     */
     public function accessKey(string $accessKey): void
     {
         $this->getHttpClientBuilder()->removePlugin(AccessKey::class);
         $this->getHttpClientBuilder()->addPlugin(new AccessKey($accessKey));
     }
 
-    /**
-     * @param string $url
-     * @return void
-     */
     public function url(string $url): void
     {
         $uri = $this->getHttpClientBuilder()->getUriFactory()->createUri($url);
@@ -83,17 +66,11 @@ class Client
         );
     }
 
-    /**
-     * @return HttpMethodsClientInterface
-     */
     public function getHttpClient(): HttpMethodsClientInterface
     {
         return $this->getHttpClientBuilder()->getHttpClient();
     }
 
-    /**
-     * @return Builder
-     */
     protected function getHttpClientBuilder(): Builder
     {
         return $this->httpClientBuilder;

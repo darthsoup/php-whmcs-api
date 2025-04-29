@@ -57,8 +57,6 @@ class ExceptionHandler implements Plugin
     }
 
     /**
-     * @param int $status
-     * @param string|null $message
      * @return AuthenticationException|RuntimeException
      */
     private static function transformMessageToException(int $status, ?string $message)
@@ -78,11 +76,6 @@ class ExceptionHandler implements Plugin
         return new RuntimeException($message, $status);
     }
 
-    /**
-     * @param int $status
-     * @param string|null $message
-     * @return ErrorException
-     */
     private static function transformWhmcsMessageToException(int $status, ?string $message): ErrorException
     {
         return new ErrorException($message, $status);

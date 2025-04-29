@@ -47,9 +47,6 @@ class Authentication implements Plugin
         return $next($request);
     }
 
-    /**
-     * @return string
-     */
     private function buildAuth(): string
     {
         $authBag = [];

@@ -10,7 +10,6 @@ use Psr\Http\Message\ResponseInterface;
 final class ResponseFormatter
 {
     /**
-     * @param ResponseInterface $response
      * @return mixed|string
      * @throws JsonException
      */
@@ -18,37 +17,29 @@ final class ResponseFormatter
     {
         $body = (string)$response->getBody();
 
-        if (strpos($response->getHeaderLine('Content-Type'), 'application/json') === 0) {
+        if (str_starts_with($response->getHeaderLine('Content-Type'), 'application/json')) {
             return json_decode($body, true, 512, JSON_THROW_ON_ERROR);
         }
 
         return $body;
     }
 
-    /**
-     * @param ResponseInterface $response
-     * @return string|null
-     */
     public static function errorResult(ResponseInterface $response): ?string
     {
         try {
             $content = self::format($response);
-        } catch (JsonException $e) {
+        } catch (JsonException) {
             return null;
         }
 
         return $content['result'] ?? null;
     }
 
-    /**
-     * @param ResponseInterface $response
-     * @return string|null
-     */
     public static function errorMessage(ResponseInterface $response): ?string
     {
         try {
             $content = self::format($response);
-        } catch (JsonException $e) {
+        } catch (JsonException) {
             return null;
         }
 
