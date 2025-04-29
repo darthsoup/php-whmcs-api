@@ -11,7 +11,7 @@ use PHPUnit\Framework\TestCase;
 
 class ResponseFormatterTest extends TestCase
 {
-    public function testFormat()
+    public function testFormat(): void
     {
         $response = new Response(
             200,
@@ -22,7 +22,7 @@ class ResponseFormatterTest extends TestCase
         $this->assertSame(['result' => 'success'], ResponseFormatter::format($response));
     }
 
-    public function testFormatString()
+    public function testFormatString(): void
     {
         $expected = '{"result": "success"}';
 
@@ -35,7 +35,7 @@ class ResponseFormatterTest extends TestCase
         $this->assertEquals($expected, ResponseFormatter::format($response));
     }
 
-    public function testFormatWithInvalidResponseData()
+    public function testFormatWithInvalidResponseData(): void
     {
         $this->expectException(\JsonException::class);
 
@@ -48,7 +48,7 @@ class ResponseFormatterTest extends TestCase
         ResponseFormatter::format($response);
     }
 
-    public function testErrorMessage()
+    public function testErrorMessage(): void
     {
         $response = new Response(
             200,

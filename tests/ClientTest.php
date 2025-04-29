@@ -16,10 +16,10 @@ use PHPUnit\Framework\TestCase;
 
 class ClientTest extends TestCase
 {
-    public function testIsCreatable()
+    public function testIsCreatable(): void
     {
         $client = new Client();
-        $client->url('http://example.com');
+        $client->url('https://example.com');
         $client->authenticate('username', 'password');
 
         $this->assertInstanceOf(Client::class, $client);
@@ -49,7 +49,7 @@ class ClientTest extends TestCase
         $this->assertSame($expected, (string) $request->getUri());
     }
 
-    public function urlProvider(): iterable
+    public static function urlProvider(): iterable
     {
         yield ['http://example.com/whmcs', 'http://example.com/whmcs/includes/api.php'];
         yield ['http://example.com/whmcs/', 'http://example.com/whmcs/includes/api.php'];
