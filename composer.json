@@ -22,10 +22,10 @@
         "symfony/options-resolver": "^5.0 || ^6.0 || ^7.0"
     },
     "require-dev": {
-        "phpunit/phpunit": "^8.5.14 || ^9.5.1",
+        "phpunit/phpunit": "^8.5 || ^9.5",
         "guzzlehttp/guzzle": "^7.8",
         "http-interop/http-factory-guzzle": "^1.0",
-        "phpstan/phpstan": "^1.10"
+        "phpstan/phpstan": "^2.1"
     },
     "autoload": {
         "psr-4": {
