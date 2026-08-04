@@ -67,7 +67,7 @@ class ExceptionHandler implements Plugin
             return new RuntimeException($message, $status);
         }
 
-        if (400 === $status && strpos($message, self::ERROR_AUTH_INVALID_IP)) {
+        if (400 === $status && null !== $message && false !== strpos($message, self::ERROR_AUTH_INVALID_IP)) {
             return new IpBlockedException($message, $status);
         }
 
