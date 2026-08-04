@@ -17,8 +17,8 @@ class Addons extends AbstractApi
             'nextduedate', 'terminationdate', 'notes', 'autorecalc',
         ]);
         $resolver->setAllowedTypes('id', 'int');
-        $resolver->setAllowedTypes('setupfee', 'float‚');
-        $resolver->setAllowedTypes('recurring', 'float‚');
+        $resolver->setAllowedTypes('setupfee', 'float');
+        $resolver->setAllowedTypes('recurring', 'float');
         $resolver->setAllowedValues('status', self::STATUS_PRODUCT);
 
         $resolver->setRequired('id');
